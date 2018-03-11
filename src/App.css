@@ -1,0 +1,12 @@
+.player{
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: blue;
+  position: absolute;
+}
+
+.game{
+  width: 700px;
+  height: 700px;
+}
