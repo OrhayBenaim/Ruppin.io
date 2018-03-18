@@ -4,22 +4,33 @@ export default class Player extends Component {
 
     constructor(props){
         super(props);
-        this.x = 0;
-        this.y = 0;
-        
+        this.state = {
+            x: 0,
+            y: 0
+        }
+
+            
+
 
     }
-    componentDidUpdate(prevProps){
-       
-        this.x = prevProps.x;
-        this.y = prevProps.y;
-      
-    }
 
+    componentDidMount(){
+        document.getElementById('gameBoard').addEventListener('mousemove', (e)=>{
+            this.setState((pervState) =>{
+                if(e.clientX > 720 - 30 || e.clientY > 720 - 30){
+                    return {x: pervState.x , y: pervState.y}
+                }
+                else{
+                    return {x: e.clientX , y: e.clientY}
+                }
+            })
+            
+        });
+    }
 
   render() {
     return (
-        <div className="player" style={ {left: this.x , top: this.y} }></div>
+        <div className="player" style={ {left: this.state.x - 30 , top: this.state.y - 30} }></div>
     )
   }
 };

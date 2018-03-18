@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
-import ReactCursorPosition from 'react-cursor-position';
-import Game from './component/Game';
+import Player from './component/Player';
 
 class App extends Component {
   render() {
     return (
-      <ReactCursorPosition>
-            <Game />
-      </ReactCursorPosition>
+
+      <div className="game" id ='gameBoard'>
+        <Player />
+      </div>
     );
   }
 }
