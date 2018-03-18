@@ -1,9 +1,10 @@
 GITHUB CLONE
 1.  clone git repo 
-    VS CODE: 
-        1. press F1 
-        2. git clone
-        3. enter repo url
+
+Press F1
+Git: Clone
+Enter repo url https://github.com/OrhayBenaim/Ruppin.io
+
 
 2.  run npm install
 ________________________________________
