@@ -1,9 +1,9 @@
 GITHUB CLONE
 1.  clone git repo 
 
-Press F1<br>
-Git: Clone<br>
-Enter repo url https://github.com/OrhayBenaim/Ruppin.io<br>
+        Press F1<br>
+        Git: Clone<br>
+        Enter repo url https://github.com/OrhayBenaim/Ruppin.io<br>
 
 
 2.  run npm install
