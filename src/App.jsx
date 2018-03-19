@@ -6,7 +6,7 @@ class App extends Component {
   render() {
     return (
 
-      <div className="game" id ='gameBoard'>
+      <div id ='gameBoard'>
         <Player />
       </div>
     );
