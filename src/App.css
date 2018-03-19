@@ -8,4 +8,5 @@
 #gameBoard{
   width: 720px;
   height: 720px;
+  border: 2px solid black;
 }
