@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 const smoothing = 15;
+const radius = 30;
 export default class Player extends Component {
 
     constructor(props){
@@ -39,7 +40,7 @@ export default class Player extends Component {
 
   render() {
     return (
-        <div className="player" style={ {left: this.state.x - 30, top: this.state.y + 30} }></div>
+        <div className="player" style={ {left: this.state.x - radius, top: this.state.y + radius} }></div>
     )
   }
 };
