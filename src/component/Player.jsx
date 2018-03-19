@@ -13,7 +13,22 @@ export default class Player extends Component {
 
         this.x = 0;
         this.y = 0;
-           setInterval( ()=>{//when we create the component start a interval
+           
+
+
+    }
+
+    
+    componentDidMount(){// once every thing loaded in this component 
+                        //attach a mouse move to the gameboard element
+        document.getElementById('gameBoard').addEventListener('mousemove', (e)=>{
+            this.x = e.clientX;
+            this.y = e.clientY;
+            // same new positions to vars that only exist in this class (this.x , this.y)
+        });
+
+
+        setInterval( ()=>{//when we create the component start a interval
             this.setState((pervState) =>{//every 32ms state need to be updated
                 if( (this.state.x > 720 - 30 || this.state.y > 720 - 30 ) ||
                     ( pervState.x === this.x && pervState.y === this.y) ){//if out of range
@@ -28,19 +43,9 @@ export default class Player extends Component {
                     return {x: pervState.x -  Math.cos(angle) *distance , y: pervState.y -  Math.sin(angle) *distance }
                 }
             })
+            
+            
            } , 32);
-
-
-    }
-
-    
-    componentDidMount(){// once every thing loaded in this component 
-                        //attach a mouse move to the gameboard element
-        document.getElementById('gameBoard').addEventListener('mousemove', (e)=>{
-            this.x = e.clientX;
-            this.y = e.clientY;
-            // same new positions to vars that only exist in this class (this.x , this.y)
-        });
     }
 
   render() {

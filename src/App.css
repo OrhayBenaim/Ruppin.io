@@ -5,3 +5,7 @@
   background-color: blue;
   position: absolute;
 }
+#gameBoard{
+  width: 720px;
+  height: 720px;
+}
