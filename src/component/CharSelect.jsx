@@ -20,5 +20,5 @@ const CharSelect = () => {
             character four
        </button>
     </div>;
-
+}
 export default CharSelect;
