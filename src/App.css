@@ -1,12 +1,81 @@
-.player{
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background-color: blue;
-  position: absolute;
+.App {
+  text-align: center;
 }
-#gameBoard{
-  width: 720px;
-  height: 720px;
-  border: 2px solid black;
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.charBtn {
+  width: 225px;
+}
+.avatar{
+  border-radius: 50%;
+  width: 225px;
+  height: 225px;
+
+}
+.imgPop{
+  animation-name: 'popimage';
+     animation-fill-mode: forwards;
+     -webkit-animation-fill-mode: forwards;
+  animation-duration: 1s;
+}
+
+.imgPush{
+  animation-name: 'pushimage';
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
+  animation-duration: 1s;
+}
+
+@keyframes pushimage{
+
+    0% {
+      height: 350px;
+      width: 350px;
+    }
+       100% {
+         width: 225px;
+         height: 225px;
+       }
+}
+
+@keyframes popimage {
+  0% {
+    width: 225px;
+    height: 225px;
+  }
+  100%{
+    height: 350px;
+    width: 350px;
+  }
+}
+.blue{
+  background-color: rgb(42, 131, 190);
 }
