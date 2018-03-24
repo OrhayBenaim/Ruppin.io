@@ -13,17 +13,33 @@ export default class Fields extends Component {
 
     }
     btnLogin = (e) => {
-        alert("Login Button");
+
+        if(this.state.email.length > 2){
+            this.props.history.replace({
+                pathname: '/charselect',
+                state: {
+                    email: this.state.email,
+                    userName: this.state.user
+                }
+            })
+        }
     }
     btnReset = (e) => {
-        alert("Reset Button");
+
     }
-    txtChange = (e) => {
+    emailChange = (e) => {
         let mail = e.target.value;
         this.setState(() => {
             return { email: mail }
         })
 
+    }
+
+    userChange = (e) =>{
+        let _user = e.target.value;
+        this.setState({
+            user: _user
+        })
     }
 
     sub = (e) => {
@@ -35,11 +51,11 @@ export default class Fields extends Component {
                 <form onSubmit={this.sub}>
                     <div className="form-group">
                         <label htmlFor="inputEmail">Email address</label>
-                        <input onChange={this.txtChange} type="email" className="form-control" id="userEmail" aria-describedby="emailHelp" placeholder="Enter email" />
+                        <input onChange={this.emailChange} type="email" className="form-control" id="userEmail" aria-describedby="emailHelp" placeholder="Enter email" />
                     </div>
                     <div className="form-group">
                         <label htmlFor="inputUser">User Name</label>
-                        <input type="text" id="userId" className="form-control" placeholder="User Name" />
+                        <input onChange={this.userChange} type="text" id="userId" className="form-control" placeholder="User Name" />
                     </div>
                     <div className="form-group">
                         <label htmlFor="inputPass">Password</label>

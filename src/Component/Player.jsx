@@ -13,8 +13,8 @@ export default class Player extends Component {
     constructor(props){
         super(props);
         this.state = {
-            x: 0,
-            y: 0
+            x: 100,
+            y: 100
         }
 
 
@@ -22,7 +22,8 @@ export default class Player extends Component {
 
 
     componentDidMount(){
-  
+        console.log(this.props.userName);
+        
         setInterval( ()=>{//when we create the component start a interval
             this.setState((pervState) =>{//every 32ms state need to be updated
                 if( (this.state.x > 720 - 30 || this.state.y > 720 - 30 ) ||
@@ -47,7 +48,11 @@ export default class Player extends Component {
   render() {
     return (
             // moving the player using css left and top
-        <div className="player" style={ {left: this.state.x - radius, top: this.state.y + radius} }></div>
+            <div className='players' style={ {left: this.state.x - radius, top: this.state.y + radius} }>
+                <div id="player" ></div>
+                <p>{this.props.userName}</p>
+            </div>
+        
     )
   }
 };

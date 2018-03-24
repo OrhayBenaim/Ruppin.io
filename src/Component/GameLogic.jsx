@@ -11,7 +11,7 @@ export default class GameLogic extends Component {
         }
       }
 
-      getPosition = (e) =>{
+      getPositionTouch = (e) =>{
         e.preventDefault();
         this.e = e.targetTouches
         this.setState(()=>{
@@ -19,11 +19,21 @@ export default class GameLogic extends Component {
         });
         
       }
+
+
+      getPositionMouse = (e) =>{
+        e.preventDefault();
+        this.setState({
+          x: e.pageX ,
+          y: e.pageY});
+        
+      }
       render() {
+        
         return (
     
-          <div id ='gameBoard' onTouchMove = {this.getPosition}>
-            <Player x = {this.state.x} y = {this.state.y}/>
+          <div id ='gameBoard' onTouchMove = {this.getPositionTouch} onMouseMove   = {this.getPositionMouse}>
+            <Player x = {this.state.x} y = {this.state.y} userName = {this.props.location.state.playerName}/>
           </div>
         );
       }
