@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import Player from './Player';
+import io from 'socket.io-client';
+const ip = '10.0.0.18';
+const socket = io(`${ip}:3002`);
 
 export default class GameLogic extends Component {
 
@@ -16,7 +19,15 @@ export default class GameLogic extends Component {
         this.e = e.targetTouches
         this.setState(()=>{
           return {x: this.e[0].pageX , y: this.e[0].pageY}
-        });
+        }, ()=>{
+          let data = {
+            x: this.state.x,
+            y: this.state.y,
+            name: this.props.location.state.playerName
+          }
+            socket.emit('p.pos', JSON.stringify(data));
+            
+          });
         
       }
 
@@ -25,7 +36,16 @@ export default class GameLogic extends Component {
         e.preventDefault();
         this.setState({
           x: e.pageX ,
-          y: e.pageY});
+          y: e.pageY
+        }, ()=>{
+          let data = {
+            x: this.state.x,
+            y: this.state.y,
+            name: this.props.location.state.playerName
+          }
+            socket.emit('p.pos', JSON.stringify(data));
+            
+          });
         
       }
       render() {
