@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Player from './Player';
 import io from 'socket.io-client';
-const ip = '10.0.0.18';
-const socket = io(`${ip}:3002`);
+const ip = '10.0.0.21';
+
 
 export default class GameLogic extends Component {
 
@@ -12,7 +12,31 @@ export default class GameLogic extends Component {
           x: 0,
           y: 0
         }
+        
+        this.socket = io(`${ip}:3001`);
+        this.Players = [];
+      
+        
       }
+
+      
+
+      componentDidMount(){
+  
+        this.socket.on('p.pos', (msg)=>{
+          let data = msg.split(' ');
+          if(data[0] !== this.props.location.state.email){
+            this.Players[data[0] ] =   
+            <Player x = {data[1]} y = {data[2]} userName = {data[3]}/>
+          this.setState({});//force update
+          }else{
+          this.setState({
+            x: data[1] ,
+            y: data[2]
+        });
+      }
+      })
+    }
 
       getPosition = (e) =>{
         e.preventDefault();
@@ -20,30 +44,25 @@ export default class GameLogic extends Component {
         let x = e.type === 'touchmove' ? e.targetTouches[0].pageX : e.pageX;
         let y = e.type === 'touchmove' ? e.targetTouches[0].pageY : e.pageY
 
-        this.setState(()=>{
-          console.log(x , y);
-          
-          return {x: x , y: y}
-        }, ()=>{
           let data = {
-            x: this.state.x,
-            y: this.state.y,
+            x: x,
+            y: y,
             name: this.props.location.state.playerName,
             email: this.props.location.state.email
           }
-            //socket.emit('p.pos', `${data.email} ${data.x} ${data.y} ${data.name}`);
-            //send message to the server as fast as we can????
+            this.socket.emit('p.pos', `${data.email} ${data.x} ${data.y} ${data.name}`);
             
-          });
         
       }
 
       render() {
-        
         return (
     
           <div id ='gameBoard' onTouchMove = {this.getPosition} onMouseMove = {this.getPosition}>
+            {Object.values(this.Players)}
+            
             <Player x = {this.state.x} y = {this.state.y} userName = {this.props.location.state.playerName}/>
+            
           </div>
         );
       }
