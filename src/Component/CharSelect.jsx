@@ -37,7 +37,8 @@ export default class CharSelect extends Component {
                 pathname: '/game',
                 state: {
                     characterID: this.state.element.id,
-                    playerName: this.props.location.state.userName
+                    playerName: this.props.location.state.userName,
+                    email: this.props.location.state.email
                 }
                });
                 

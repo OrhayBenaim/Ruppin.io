@@ -14,45 +14,35 @@ export default class GameLogic extends Component {
         }
       }
 
-      getPositionTouch = (e) =>{
+      getPosition = (e) =>{
         e.preventDefault();
-        this.e = e.targetTouches
+
+        let x = e.type === 'touchmove' ? e.targetTouches[0].pageX : e.pageX;
+        let y = e.type === 'touchmove' ? e.targetTouches[0].pageY : e.pageY
+
         this.setState(()=>{
-          return {x: this.e[0].pageX , y: this.e[0].pageY}
+          console.log(x , y);
+          
+          return {x: x , y: y}
         }, ()=>{
           let data = {
             x: this.state.x,
             y: this.state.y,
-            name: this.props.location.state.playerName
+            name: this.props.location.state.playerName,
+            email: this.props.location.state.email
           }
-            socket.emit('p.pos', JSON.stringify(data));
+            //socket.emit('p.pos', `${data.email} ${data.x} ${data.y} ${data.name}`);
+            //send message to the server as fast as we can????
             
           });
         
       }
 
-
-      getPositionMouse = (e) =>{
-        e.preventDefault();
-        this.setState({
-          x: e.pageX ,
-          y: e.pageY
-        }, ()=>{
-          let data = {
-            x: this.state.x,
-            y: this.state.y,
-            name: this.props.location.state.playerName
-          }
-            socket.emit('p.pos', JSON.stringify(data));
-            
-          });
-        
-      }
       render() {
         
         return (
     
-          <div id ='gameBoard' onTouchMove = {this.getPositionTouch} onMouseMove   = {this.getPositionMouse}>
+          <div id ='gameBoard' onTouchMove = {this.getPosition} onMouseMove = {this.getPosition}>
             <Player x = {this.state.x} y = {this.state.y} userName = {this.props.location.state.playerName}/>
           </div>
         );
