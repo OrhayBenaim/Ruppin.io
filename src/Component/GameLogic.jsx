@@ -17,8 +17,8 @@ export default class GameLogic extends Component {
         this.userName = this.props.location.state.playerName;
         this.socket = io(`${ip}:3001`);
         this.Players = [];
-        this.socket.emit('p.pos', JSON.stringify( {
-          email: this.email,
+        this.socket.emit('p.pos', JSON.stringify( { // just logged into game better tell the server
+          email: this.email,                        //my init position and data
           x: this.state.x,
           y: this.state.y,
           userName: this.userName
@@ -29,23 +29,30 @@ export default class GameLogic extends Component {
       
 
       componentDidMount(){
-  
-        this.socket.on('p.pos', (msg)=>{// need to change to recive array of players
-          console.log(msg);
-          
-          /*
-          if(data[0] !== this.props.location.state.email){
-            this.Players[data[0] ] =   
-            <Player x = {data[1]} y = {data[2]} userName = {data[3]}/>
-          this.setState({});//force update
-          }else{
-          this.setState({
-            x: data[1] ,
-            y: data[2]
+        this.socket.on('DC' , (email) => {
+          delete this.Players[email]; // when user disconnect update the array of users
         });
-        
-        }
-        */
+
+        this.socket.on('p.pos', (msg)=>{// need to change to recive array of players
+          
+          let data = JSON.parse(msg);
+          data.forEach(ply => {
+
+            if(ply.email !== this.props.location.state.email){
+              this.Players[ply.email] =   
+              <Player x = {ply.x} y = {ply.y} userName = {ply.name}/>
+              this.setState({});//force update
+
+            }else{
+              this.setState({
+                x: ply.x ,
+                y: ply.y
+              });
+          
+            }
+            
+          });
+          
       })
     }
 

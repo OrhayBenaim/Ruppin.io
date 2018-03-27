@@ -5,28 +5,29 @@ const port = 3001;
 
 
 let players = [];
-let playersCount = 0 ;
+
 
 io.on('connection', function(socket){
-  console.log(`player ${socket.id} at server`);
-  playersCount++;
+  
   socket.on('disconnect', function(){
-    console.log('user disconnected');//send DC message to all users to update
-    playersCount--;
+   io.emit('DC',players[socket.id].email); // a player disconnected better tell the others
+   
+    delete players[socket.id]; // better update my own table of players
+
   });
 
-  socket.on('p.pos', function(msg){
-    //// need to move this into 45ms interval
-    let data = JSON.parse(msg);
+  socket.on('p.pos', function(msg){ // a player moved better update his data
     
-    players[data.email]={
+    let data = JSON.parse(msg);
+
+    players[socket.id]={
+      email: data.email,
       x: data.x,
       y: data.y,
       name: data.userName
     }
-    console.log(players);
-    
-    //io.emit('p.pos' , players );
+ 
+
  
   });
 
@@ -34,9 +35,10 @@ io.on('connection', function(socket){
   
 });
 setInterval( ()=> {
-  if(playersCount>0){
-   //io.emit('p.pos' , players );
-
+  if(Object.keys(players).length>0){ // if there are players in game better tell every one their location
+   
+    io.emit('p.pos' , JSON.stringify( Object.values(players) ));
+ 
     
   }
 } , 45)
