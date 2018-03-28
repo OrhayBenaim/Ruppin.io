@@ -4,17 +4,16 @@ var io = require('socket.io')(http);
 const port = 3001;
 
 
-let players = [];
+let players = {};
 
 
 io.on('connection', function(socket){
   
   socket.on('disconnect', function(){
-   io.emit('DC',players[socket.id].email); // a player disconnected better tell the others
-   
-    delete players[socket.id]; // better update my own table of players
 
-  });
+     delete players[socket.id]; // better update my own table of players
+ 
+   });
 
   socket.on('p.pos', function(msg){ // a player moved better update his data
     
@@ -24,7 +23,8 @@ io.on('connection', function(socket){
       email: data.email,
       x: data.x,
       y: data.y,
-      name: data.userName
+      name: data.userName,
+      avatar: data.avatar
     }
  
 
@@ -34,6 +34,7 @@ io.on('connection', function(socket){
 
   
 });
+
 setInterval( ()=> {
   if(Object.keys(players).length>0){ // if there are players in game better tell every one their location
    
@@ -45,4 +46,4 @@ setInterval( ()=> {
 
 http.listen(port, function(){
   console.log('listening on *:'+port);
-});
+})

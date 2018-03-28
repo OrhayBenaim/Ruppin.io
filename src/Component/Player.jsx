@@ -17,7 +17,7 @@ export default class Player extends Component {
             y: 100
         }
 
-
+        this.avatar = `/images/Character_${this.props.avatar}.png`;
     }
 
 
@@ -49,7 +49,7 @@ export default class Player extends Component {
     return (
             // moving the player using css left and top
             <div className='players' style={ {left: this.state.x - radius, top: this.state.y + radius} }>
-                <div id="player" ></div>
+                <img id = 'player' src={this.avatar} alt="" srcset=""/>
                 <p>{this.props.userName}</p>
             </div>
         

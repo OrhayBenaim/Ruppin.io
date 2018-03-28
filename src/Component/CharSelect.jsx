@@ -50,23 +50,10 @@ export default class CharSelect extends Component {
       
     return (
         <div className="blue">
-            <img alt='Character 1' id="1" src="/images/monster-1.png" className="avatar" onClick={this.handleClick} />
-            <img alt='Character 2' id="2" src="/images/monster-2.png" className="avatar" onClick={this.handleClick} />
-            <img alt='Character 3' id="3" src="/images/monster-3.png" className="avatar" onClick={this.handleClick} />
-            <img alt='Character 4' id="4" src="/images/monster-4.png" className="avatar" onClick={this.handleClick} />
-            <br />
-            <button type="button" className="btn charBtn btn-info">
-                character one
-       </button>
-            <button type="button" className="btn charBtn btn-info">
-                character two
-       </button>
-            <button type="button" className="btn charBtn btn-info">
-                character three
-       </button>
-            <button type="button" className="btn charBtn btn-info">
-                character four
-       </button>
+            <img alt='Character 1' id="1" src="/images/Character_1.png" className="avatar" onClick={this.handleClick} />
+            <img alt='Character 2' id="2" src="/images/Character_2.png" className="avatar" onClick={this.handleClick} />
+            <img alt='Character 3' id="3" src="/images/Character_3.png" className="avatar" onClick={this.handleClick} />
+            <img alt='Character 4' id="4" src="/images/Character_4.png" className="avatar" onClick={this.handleClick} />
         </div>
     )
   }
