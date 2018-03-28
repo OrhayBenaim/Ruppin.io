@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const smoothing = 15;
+const smoothing = 50;
 const radius = 30;
 
 
@@ -13,8 +13,9 @@ export default class Player extends Component {
     constructor(props){
         super(props);
         this.state = {
-            x: 100,
-            y: 100
+            x: this.props.x,
+            y: this.props.x,
+            angle: 0
         }
 
         this.avatar = `/images/Character_${this.props.avatar}.png`;
@@ -22,7 +23,7 @@ export default class Player extends Component {
 
 
     componentDidMount(){
-        console.log(this.props.userName);
+
         
         setInterval( ()=>{//when we create the component start a interval
             this.setState((pervState) =>{//every 32ms state need to be updated
@@ -36,7 +37,10 @@ export default class Player extends Component {
                     //get angle between 2 points (mouse position and player position)
                     let angle = Math.atan2(pervState.y - this.props.y, pervState.x - this.props.x);
                     //set the new position to the position we heading at
-                    return {x: pervState.x -  Math.cos(angle) *distance , y: pervState.y -  Math.sin(angle) *distance }
+                    return {
+                        x: pervState.x -  Math.cos(angle) *distance,
+                        y: pervState.y -  Math.sin(angle) *distance,
+                        angle: angle }
                 }
             })
             
@@ -49,7 +53,7 @@ export default class Player extends Component {
     return (
             // moving the player using css left and top
             <div className='players' style={ {left: this.state.x - radius, top: this.state.y + radius} }>
-                <img id = 'player' src={this.avatar} alt="" srcset=""/>
+                <img alt='' id = 'player' src={this.avatar} style={ {transform: `rotate(${( (this.state.angle * 180) / Math.PI) + 90}deg)` } }/>
                 <p>{this.props.userName}</p>
             </div>
         
