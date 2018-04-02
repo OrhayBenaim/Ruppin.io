@@ -1,0 +1,152 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin:0;
+	padding:0;
+	border:0;
+	outline:0;
+	font-weight:inherit;
+	font-style:inherit;
+	font-size:100%;
+	vertical-align:baseline;
+}
+
+html
+{
+    height:100%; 
+    margin-bottom: 0px; 
+}
+
+body 
+{
+    text-align:left;
+    height:100%; 
+    margin-bottom: 0px;
+    font-family: 'Montserrat', sans-serif;
+	direction:ltr;
+}
+
+section#login
+{
+	background-image: url(/images/bg.jpg);
+	height: 100vh;
+	background-size: cover;
+}
+section#login div.form
+{
+	
+	width: 400px;
+	height: 500px;
+	text-align: center;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	position: absolute;
+	padding-top: 122px;
+	font-family: 'Montserrat', sans-serif;
+	
+}
+section#login div.form input
+{
+	width: 70%;
+	margin-bottom: 16px;
+	padding: 20px 10px 20px 10px;
+	border: none;
+	background-color: #dff4f4;
+	opacity: 0.6;
+	outline: none;
+	resize: none;
+	font-family: 'Montserrat', sans-serif;
+	border-radius: 14px;
+	font-size: 18px;
+}
+section#login div.form input.button
+{
+	background-color: #efe80a;
+	opacity: 0.5;
+	margin-left: 2px;
+	font-family: 'Montserrat', sans-serif;
+	color: #466ba6;
+	font-weight: 500;
+}
+section#login div.form input.button2
+{
+	background-color: #dff4f4;
+	opacity: 0.5;
+	margin-left: 2px;
+	font-family: 'Montserrat', sans-serif;
+	color: #466ba6;
+	font-weight: 500;
+}
+section#login div.form div.google
+{
+	display: inline-block;
+	position: absolute;
+	top: 540px;
+    left: 108px;
+	width: 200px;
+}
+section#login div.form div.facebook
+{
+	display: inline-block;
+	position: absolute;
+	top: 577px;
+    left: 126px;
+	width: 200px;
+}
+
+section#login img
+{
+	position: absolute;
+	bottom: 50px;
+	right: 50px;
+}
+section#login div.form input.register
+{
+    background-color: #efe80a;
+	opacity: 0.5;
+	margin-left: 2px;
+	font-family: 'Montserrat', sans-serif;
+	color: #466ba6;
+	font-weight: 500;
+	width: 34%;
+	display: inline-block;
+}
+section#login div.form input.cancel
+{
+    background-color: #dff4f4;
+	margin-left: 4px;
+	font-family: 'Montserrat', sans-serif;
+	color: #466ba6;
+	font-weight: 500;
+	width: 34%;
+	display: inline-block;
+}
+
+
+
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #466ba6;
+	opacity: 1 !important;
+  
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #466ba6;
+
+	
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #466ba6;
+
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: #466ba6;
+
+	
+}

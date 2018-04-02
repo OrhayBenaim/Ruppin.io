@@ -1,0 +1,14 @@
+
+  #player{
+    width: 62px;
+  }
+  .players{
+    position: absolute;
+  }
+  
+  #gameBoard{
+    border: 2px solid black;
+    width: 720px;
+    height: 720px;
+    touch-action: none;
+  }

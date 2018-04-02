@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import Player from './Player';
 import io from 'socket.io-client';
-const ip = '10.0.0.120';
+
+import './Styles/Game.css';
+
+const ip = '79.178.92.82';
 
 
 export default class GameLogic extends Component {
@@ -9,14 +12,15 @@ export default class GameLogic extends Component {
     constructor(props){
         super(props);
         this.state = {
-          x: 0,
-          y: 0
+          x: Math.random()*100,
+          y: Math.random()*100
         }
 
         this.email = this.props.location.state.email;
         this.userName = this.props.location.state.playerName;
         this.socket = io(`${ip}:3001`);
         this.Players = {};
+
         this.socket.emit('p.pos', JSON.stringify( { // just logged into game better tell the server
           email: this.email,                        //my init position and data
           x: this.state.x,
@@ -38,6 +42,8 @@ export default class GameLogic extends Component {
           data = data.filter( ply => ply.email !== this.props.location.state.email) ;
 
           data.forEach(ply => {
+            console.log(ply.avatar);
+            
               this.Players[ply.email] =   
               <Player x = {ply.x} y = {ply.y} userName = {ply.name} avatar = {ply.avatar}/>
 

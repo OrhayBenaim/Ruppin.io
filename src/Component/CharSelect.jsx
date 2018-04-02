@@ -1,6 +1,5 @@
-
-
 import React, { Component } from 'react';
+import './Styles/CharSelect.css';
 
 export default class CharSelect extends Component {
     constructor(props)

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
-import Login from './Component/Fields';
+import Login from './Component/Login';
+import Register from './Component/Register';
 import CharSelect from './Component/CharSelect';
 import Game from './Component/GameLogic';
 import {BrowserRouter , Route} from 'react-router-dom';
@@ -14,6 +14,7 @@ class App extends Component {
         <BrowserRouter>
             <div>
               <Route exact path='/' component={Login}/>
+              <Route path ='/register' component={Register} />
               <Route path='/charselect' component={CharSelect}/>
               <Route exact path='/game' component={Game}/>
             </div>

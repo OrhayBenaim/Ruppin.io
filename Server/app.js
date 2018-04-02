@@ -8,7 +8,7 @@ let players = {};
 
 
 io.on('connection', function(socket){
-  
+
   socket.on('disconnect', function(){
 
      delete players[socket.id]; // better update my own table of players
@@ -27,7 +27,8 @@ io.on('connection', function(socket){
       avatar: data.avatar
     }
  
-
+    console.log(data.userName,data.avatar);
+    
  
   });
 
@@ -39,7 +40,6 @@ setInterval( ()=> {
   if(Object.keys(players).length>0){ // if there are players in game better tell every one their location
    
     io.emit('p.pos' , JSON.stringify( Object.values(players) ));
- 
     
   }
 } , 45)
