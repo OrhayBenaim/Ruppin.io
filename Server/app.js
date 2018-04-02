@@ -9,26 +9,25 @@ let players = {};
 
 io.on('connection', function(socket){
 
+
   socket.on('disconnect', function(){
 
-     delete players[socket.id]; // better update my own table of players
+     delete players[socket.id]; 
  
    });
 
-  socket.on('p.pos', function(msg){ // a player moved better update his data
+  socket.on('p.pos', function(msg){ 
     
     let data = JSON.parse(msg);
 
     players[socket.id]={
-      email: data.email,
+      id: socket.id,
       x: data.x,
       y: data.y,
       name: data.userName,
       avatar: data.avatar
     }
- 
-    console.log(data.userName,data.avatar);
-    
+
  
   });
 
@@ -37,7 +36,7 @@ io.on('connection', function(socket){
 });
 
 setInterval( ()=> {
-  if(Object.keys(players).length>0){ // if there are players in game better tell every one their location
+  if(Object.keys(players).length>0){ 
    
     io.emit('p.pos' , JSON.stringify( Object.values(players) ));
     

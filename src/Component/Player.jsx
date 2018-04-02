@@ -19,13 +19,15 @@ export default class Player extends Component {
         }
 
         this.avatar = `/images/Character_${this.props.avatar}.png`;
+        this.update =null;
     }
+
 
 
     componentDidMount(){
 
         
-        setInterval( ()=>{//when we create the component start a interval
+       this.update = setInterval( ()=>{//when we create the component start a interval
             this.setState((pervState) =>{//every 32ms state need to be updated
                 if( (this.state.x > 720 - 30 || this.state.y > 720 - 30 ) ||
                     ( pervState.x === this.props.x && pervState.y === this.props.y) ){//if out of range
@@ -47,13 +49,16 @@ export default class Player extends Component {
             
            } , 32);
     }
+componentWillUnmount(){
+    clearInterval(this.update);
+}
 
 
   render() {
     return (
             // moving the player using css left and top
             <div className='players' style={ {left: this.state.x - radius, top: this.state.y + radius} }>
-                <img alt='' id = 'player' src={this.avatar} style={ {transform: `rotate(${( (this.state.angle * 180) / Math.PI) + 90}deg)` } }/>
+                <img alt='' id = 'player' srcSet={this.avatar} style={ {transform: `rotate(${( (this.state.angle * 180) / Math.PI) + 90}deg)` } }/>
                 <p>{this.props.userName}</p>
             </div>
         

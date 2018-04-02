@@ -3,9 +3,7 @@ import './Styles/Fields.css';
 
 export default class Register extends Component {
 
-    constructor(props){
-        super(props);
-    }
+
 
     Cancel = () =>{
         this.props.history.replace({
@@ -29,7 +27,7 @@ export default class Register extends Component {
                     <input type='button' value='Cancel' className='cancel' onClick={this.Cancel}/>
                 </form>
             </div>
-            <img srcSet="/images/sound-on.png" className='sound'/>
+            <img srcSet="/images/sound-on.png" className='sound' alt=''/>
         </section>
 
     )

@@ -54,7 +54,7 @@ export default class Login extends Component {
                     <input type="text" placeholder='E-mail' className='white'/>
                     <input type="text" placeholder='Password'/>
                     <input type="submit"  value="Log-In" className="button"/>
-                    <input type="button" value="Register" class="button2" onClick={this.Register}/>
+                    <input type="button" value="Register" className="button2" onClick={this.Register}/>
                     <div className='google'>
                         <a href=""><img src="/images/google.png" alt=""/></a>
                     </div>
