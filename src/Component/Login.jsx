@@ -51,7 +51,7 @@ export default class Login extends Component {
             <section id='login'>
                 <div className='form'>
                 <form onSubmit={this.sub}>
-                    <input type="text" placeholder='E-mail' className='white'/>
+                    <input type="text" placeholder='E-mail'/> <br/>
                     <input type="text" placeholder='Password'/>
                     <input type="submit"  value="Log-In" className="button"/>
                     <input type="button" value="Register" className="button2" onClick={this.Register}/>
@@ -63,7 +63,7 @@ export default class Login extends Component {
                     </div>
                 </form>
                 </div>
-                <img srcSet="images/sound-on.png" alt=""/>
+                <img srcSet="images/sound-on.png" alt="" id ='mute'/>
             </section>
         );
     }

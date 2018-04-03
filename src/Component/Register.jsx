@@ -19,15 +19,17 @@ export default class Register extends Component {
         <section id='login'>
             <div className='form'>
                 <form onSubmit={this.Submitted}>
-                    <input type="text" placeholder ='Nickname'/>
-                    <input type="text" placeholder='E-mail'/>
-                    <input type="text" placeholder='Password'/>
+                    <input type="text" placeholder ='Nickname'/><br/>
+                    <input type="text" placeholder='E-mail'/><br/>
+                    <input type="text" placeholder='Password'/><br/>
                     <input type="text" placeholder='Repeat Password'/>
-                    <input type="submit" value='Register' className='register'/>
-                    <input type='button' value='Cancel' className='cancel' onClick={this.Cancel}/>
+                    <div className="kaftor">
+                        <input type="submit" value='Register' className='register'/>
+                        <input type='button' value='Cancel' className='cancel' onClick={this.Cancel}/>
+                    </div>
                 </form>
             </div>
-            <img srcSet="/images/sound-on.png" className='sound' alt=''/>
+            <img srcSet="/images/sound-on.png" className='sound' alt='' id='mute'/>
         </section>
 
     )

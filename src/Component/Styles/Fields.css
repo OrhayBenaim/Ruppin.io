@@ -19,41 +19,41 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 html
 {
     height:100%; 
-    margin-bottom: 0px; 
+	margin-bottom: 0px;   
+	 overflow-x: hidden; 
+    overflow-y: auto;
 }
 
 body 
 {
+	
     text-align:left;
     height:100%; 
     margin-bottom: 0px;
     font-family: 'Montserrat', sans-serif;
 	direction:ltr;
+	background-image: url(/images/bg.jpg);
+	background-size: cover;
+	overflow-x: hidden; 
+    overflow-y: auto;
 }
 
-section#login
-{
-	background-image: url(/images/bg.jpg);
-	height: 100vh;
-	background-size: cover;
+div.form{
+	display: inline-block
 }
 section#login div.form
 {
-	
-	width: 400px;
-	height: 500px;
+
 	text-align: center;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%,-50%);
-	position: absolute;
-	padding-top: 122px;
+	width: 50%;
+	margin-top: 5%;
+	margin-left: 20%;
 	font-family: 'Montserrat', sans-serif;
 	
 }
 section#login div.form input
 {
-	width: 70%;
+	width: 50%;
 	margin-bottom: 16px;
 	padding: 20px 10px 20px 10px;
 	border: none;
@@ -83,31 +83,14 @@ section#login div.form input.button2
 	color: #466ba6;
 	font-weight: 500;
 }
-section#login div.form div.google
-{
-	display: inline-block;
-	position: absolute;
-	top: 540px;
-    left: 108px;
-	width: 200px;
-}
-section#login div.form div.facebook
-{
-	display: inline-block;
-	position: absolute;
-	top: 577px;
-    left: 126px;
-	width: 200px;
+
+.google{
+	margin-right: 20px;
 }
 
-section#login img
-{
-	position: absolute;
-	bottom: 50px;
-	right: 50px;
-}
 section#login div.form input.register
 {
+	text-align: center;
     background-color: #efe80a;
 	opacity: 0.5;
 	margin-left: 2px;
@@ -115,16 +98,19 @@ section#login div.form input.register
 	color: #466ba6;
 	font-weight: 500;
 	width: 34%;
+	height: auto;
 	display: inline-block;
 }
 section#login div.form input.cancel
 {
+	text-align: center;
     background-color: #dff4f4;
 	margin-left: 4px;
 	font-family: 'Montserrat', sans-serif;
 	color: #466ba6;
 	font-weight: 500;
 	width: 34%;
+	height: auto;
 	display: inline-block;
 }
 
@@ -149,4 +135,188 @@ section#login div.form input.cancel
   color: #466ba6;
 
 	
+}
+
+
+
+
+/* Mobile Styles */
+@media only screen and (max-width: 400px) {
+
+	section#login{
+		margin-top: 30%;
+	}
+
+	section#login div.form
+	{
+	
+		text-align: center;
+		font-family: 'Montserrat', sans-serif;
+		
+	}
+	section#login div.form input
+	{
+		width: 120%;
+		margin-bottom: 16px;
+		padding: 20px 10px 20px 10px;
+		border: none;
+		background-color: #dff4f4;
+		opacity: 0.6;
+		outline: none;
+		resize: none;
+		font-family: 'Montserrat', sans-serif;
+		border-radius: 14px;
+		font-size: 18px;
+	}
+	section#login div.form input.button
+	{
+		background-color: #efe80a;
+		opacity: 0.5;
+		margin-left: 2px;
+		font-family: 'Montserrat', sans-serif;
+		color: #466ba6;
+		font-weight: 500;
+	}
+	section#login div.form input.button2
+	{
+		background-color: #dff4f4;
+		opacity: 0.5;
+		margin-left: 2px;
+		font-family: 'Montserrat', sans-serif;
+		color: #466ba6;
+		font-weight: 500;
+	}
+	
+	.google{
+		margin-right: 20px;
+	}
+	#mute{
+		position: absolute;
+		bottom: 5%;
+		right: 5%; 
+	}
+	section#login div.form input.register
+	{
+		background-color: #efe80a;
+		opacity: 0.5;
+		font-family: 'Montserrat', sans-serif;
+		color: #466ba6;
+		font-weight: 500;
+		width: 45%;
+
+	}
+	section#login div.form input.cancel
+	{
+		background-color: #dff4f4;
+		margin-left: 4px;
+		font-family: 'Montserrat', sans-serif;
+		color: #466ba6;
+		font-weight: 500;
+		width: 45%;
+		height: auto;
+
+	}
+	
+	section#login div.kaftor{
+		position: absolute;
+		width: 65%;
+		text-align: left;
+	}
+
+}
+
+
+
+
+@media only screen and (orientation: landscape)
+
+{
+
+
+
+	section#login{
+		margin-top: 0%;
+	}
+
+	section#login div.form
+	{
+		
+		font-family: 'Montserrat', sans-serif;
+		width: 80%;
+
+		
+	}
+	form{
+		margin-right: 20%;
+	}
+	section#login div.form input
+	{
+		text-align: left;
+		width: 100%;
+		height: 30pt;
+		margin-bottom: 16px;
+		padding: 20px 10px 20px 10px;
+		border: none;
+		background-color: #dff4f4;
+		opacity: 0.6;
+		outline: none;
+		resize: none;
+		font-family: 'Montserrat', sans-serif;
+		border-radius: 14px;
+		font-size: 18px;
+	}
+	section#login div.form input.button
+	{
+
+		text-align: center;
+		background-color: #efe80a;
+		opacity: 0.5;
+		font-family: 'Montserrat', sans-serif;
+		color: #466ba6;
+		font-weight: 500;
+		width: 40%;
+		height: auto;
+	}
+	section#login div.form input.button2
+	{
+		text-align: center;
+		background-color: #dff4f4;
+		opacity: 0.5;
+		font-family: 'Montserrat', sans-serif;
+		color: #466ba6;
+		font-weight: 500;
+		width: 40%;
+		height: auto;
+	}
+	
+	.google{
+		margin-right: 20px;
+	}
+	#mute{
+		margin-left: 90%
+	}
+	section#login div.form input.register
+	{
+		background-color: #efe80a;
+		opacity: 0.5;
+		margin-left: 2px;
+		font-family: 'Montserrat', sans-serif;
+		color: #466ba6;
+		font-weight: 500;
+		width: 34%;
+		display: inline-block;
+	}
+	section#login div.form input.cancel
+	{
+		background-color: #dff4f4;
+		margin-left: 4px;
+		font-family: 'Montserrat', sans-serif;
+		color: #466ba6;
+		font-weight: 500;
+		width: 34%;
+		display: inline-block;
+	}
+	
+
+
 }
