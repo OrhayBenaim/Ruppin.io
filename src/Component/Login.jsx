@@ -9,9 +9,9 @@ export default class Login extends Component {
         this.state = {
             email: "",
             user: "",
-            pass: ""
+            pass: "",
+            img: "images/sound-on.png"
         }
-
     }
 
     emailChange = (e) => {
@@ -22,7 +22,7 @@ export default class Login extends Component {
 
     }
 
-    userChange = (e) =>{
+    userChange = (e) => {
         let _user = e.target.value;
         this.setState({
             user: _user
@@ -45,25 +45,32 @@ export default class Login extends Component {
             pathname: '/register'
         })
     }
+    imgChange = () => {
+        if (this.state.img === "images/sound-on.png") {
+            this.setState({ img: "images/sound-off.png" })
+        }
+        else
+            this.setState({ img: "images/sound-on.png" })
+    }
 
     render() {
         return (
             <section id='login'>
                 <div className='form'>
-                <form onSubmit={this.sub}>
-                    <input type="text" placeholder='E-mail'/> <br/>
-                    <input type="text" placeholder='Password'/>
-                    <input type="submit"  value="Log-In" className="button"/>
-                    <input type="button" value="Register" className="button2" onClick={this.Register}/>
-                    <div className='google'>
-                        <a href=""><img src="/images/google.png" alt=""/></a>
-                    </div>
-                    <div className='facebook'>
-                        <a href=""> <img src="/images/facebook.png" alt=""/> </a>
-                    </div>
-                </form>
+                    <form onSubmit={this.sub}>
+                        <input type="email" placeholder='E-mail' className='white' />
+                        <input type="text" placeholder='Password' />
+                        <input type="submit" value="Log-In" className="button" />
+                        <input type="button" value="Register" className="button2" onClick={this.Register} />
+                        <div className='google'>
+                            <a href=""><img src="/images/google.png" alt="" /></a>
+                        </div>
+                        <div className='facebook'>
+                            <a href=""> <img src="/images/facebook.png" alt="" /> </a>
+                        </div>
+                    </form>
                 </div>
-                <img srcSet="images/sound-on.png" alt="" id ='mute'/>
+                <img id="soundImg" onClick={this.imgChange} src={this.state.img} alt="" />
             </section>
         );
     }

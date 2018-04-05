@@ -225,7 +225,11 @@ section#login div.form input.cancel
 
 }
 
-
+.icon{
+	width: 50pt;
+	height: 50pt;
+	visibility: hidden;
+}
 
 
 @media only screen and (orientation: landscape)
