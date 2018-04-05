@@ -24,16 +24,26 @@ export default class Register extends Component {
 
     Submitted = (event) => {
         event.preventDefault();
-
-        let u = this.state.user;
-        let e = this.state.email;
-        let p = this.state.pass;
-        if (u.length <= 4 || e.length <= 4 || p.length <= 4) {
-            alert("something went wrong");
-            window.location.reload();
-        }
-
-
+        let flag=true;
+      let x=this.state.valids;
+   for(let i=0;i<x.length;i++)
+   {
+       console.log(x[i]);
+       if(x[i]==false)
+       {
+       flag=false
+       }
+   }
+   if(x.length<3)
+   flag=false;
+   if(flag)
+   //put in DB
+       this.props.history.replace({
+           pathname: '/'
+       })
+   else
+   alert("nope");
+   //shake animation 
     }
 
     imgChange = () => {
@@ -65,11 +75,45 @@ export default class Register extends Component {
     }
     emailChange = (e) => {
         let mail = e.target.value;
-        this.setState({ email: mail })
+        this.setState(() => {
+            let temp = this.state.valids;
+            if (mail.length < 8) {
+                temp[1] = false;
+                return {
+                    valids: temp,
+                    email: mail
+                }
+            }
+            temp[1] = true;
+
+            return {
+                valids: temp,
+                email:mail
+            }
+        })
     }
     passChange = (e) => {
         let password = e.target.value;
-        this.setState({ pass: password })
+        this.setState({pass:password})
+    }
+    changeRepPass = (e) =>{
+        let passchk=e.target.value;
+        this.setState(()=>{
+        let temp=this.state.valids;
+        if(passchk!=this.state.pass)
+        {
+        temp[2]=false;
+        return{
+            valids:temp,
+            repPass:passchk
+              }
+        }
+        temp[2]=true;
+        return{
+            valids: temp,
+            repPass: passchk
+         }
+        })
     }
 
     render() {
@@ -81,9 +125,14 @@ export default class Register extends Component {
                         <input type="text" onChange={this.userChange} placeholder='Nickname' value={this.state.user}/>
                         <FontAwesome.FaCheck className='icon' style = { {visibility: this.state.valids[0] ? 'visible' : 'hidden'} }/>
                         <FontAwesome.FaClose className='icon' style = { {visibility: this.state.valids[0] | this.state.valids[0] ==undefined ? 'hidden' : 'visible'} }/>
-                        <input type="text" onChange={this.emailChange} placeholder='E-mail' value={this.state.email} />
+                        <input type="email" onChange={this.emailChange} placeholder='E-mail' value={this.state.email} />
+                        <FontAwesome.FaCheck className='icon1' style={{ visibility: this.state.valids[1] ? 'visible' : 'hidden' }} />
+                        <FontAwesome.FaClose className='icon1' style={{ visibility: this.state.valids[1] | this.state.valids[1] == undefined ? 'hidden' : 'visible' }} />
                         <input type="password" onChange={this.passChange} placeholder='Password' value={this.state.pass} />
                         <input type="password" onChange={this.changeRepPass} placeholder='Repeat Password' value={this.state.repPass} />
+                        <FontAwesome.FaCheck className='icon2' style={{ visibility: this.state.valids[2] ? 'visible' : 'hidden' }} />
+                        <FontAwesome.FaClose className='icon2' style={{ visibility: this.state.valids[2] | this.state.valids[2] == undefined ? 'hidden' : 'visible' }} />
+                        
                         <input type="submit" value='Register' className='register' />
                         <input type='button' value='Cancel' className='cancel' onClick={this.Cancel} />
                     </form>

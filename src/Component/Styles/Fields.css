@@ -226,11 +226,29 @@ section#login div.form input.cancel
 }
 
 .icon{
-	width: 50pt;
-	height: 50pt;
+	position:absolute;
+	left:82%;
+	top:13.5%;
+	width: 20pt;
+	height: 20pt;
 	visibility: hidden;
 }
-
+.icon1 {
+	position: absolute;
+	left: 82%;
+	top: 22.5%;
+	width: 20pt;
+	height: 20pt;
+	visibility: hidden;
+}
+.icon2 {
+	position: absolute;
+	left: 82%;
+	top: 40.5%;
+	width: 20pt;
+	height: 20pt;
+	visibility: hidden;
+}
 
 @media only screen and (orientation: landscape)
 
