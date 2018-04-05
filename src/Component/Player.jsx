@@ -18,7 +18,7 @@ export default class Player extends Component {
             angle: 0
         }
 
-        this.avatar = `/images/Character_${this.props.avatar}.png`;
+        this.avatar = `/images/Character_${this.props.avatar}.svg`;
         this.update =null;
     }
 

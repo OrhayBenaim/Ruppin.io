@@ -49,10 +49,10 @@ export default class CharSelect extends Component {
       
     return (
         <div className="blue">
-            <img alt='Character 1' id="1" src="/images/Character_1.png" className="avatar" onClick={this.handleClick} />
-            <img alt='Character 2' id="2" src="/images/Character_2.png" className="avatar" onClick={this.handleClick} />
-            <img alt='Character 3' id="3" src="/images/Character_3.png" className="avatar" onClick={this.handleClick} />
-            <img alt='Character 4' id="4" src="/images/Character_4.png" className="avatar" onClick={this.handleClick} />
+            <img alt='Character 1' id="1" src="/images/Character_1.svg" className="avatar" onClick={this.handleClick} />
+            <img alt='Character 2' id="2" src="/images/Character_2.svg" className="avatar" onClick={this.handleClick} />
+            <img alt='Character 3' id="3" src="/images/Character_3.svg" className="avatar" onClick={this.handleClick} />
+            <img alt='Character 4' id="4" src="/images/Character_4.svg" className="avatar" onClick={this.handleClick} />
         </div>
     )
   }

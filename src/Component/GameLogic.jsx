@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 
 import './Styles/Game.css';
 
-const ip = '10.0.0.120';
+const ip = '109.65.83.228';
 
 
 export default class GameLogic extends Component {
