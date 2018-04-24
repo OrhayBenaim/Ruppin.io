@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './Styles/Fields.css'
+import $ from 'jquery';
 
+const SQL_URL = 'http://localhost:53829/WebService.asmx';
 
 export default class Login extends Component {
     constructor(props) {
@@ -8,7 +10,6 @@ export default class Login extends Component {
 
         this.state = {
             email: "",
-            user: "",
             pass: "",
             img: "images/sound-on.png"
         }
@@ -22,22 +23,53 @@ export default class Login extends Component {
 
     }
 
-    userChange = (e) => {
-        let _user = e.target.value;
-        this.setState({
-            user: _user
+    passChange = (e) => {
+        let pass = e.target.value;
+        this.setState(() => {
+            return { pass: pass }
         })
+
     }
+
+
 
     sub = (e) => {
         e.preventDefault();
-        this.props.history.replace({
-            pathname: '/charselect',
-            state: {
-                email: this.state.email,
-                userName: 'bot' //'change this to get from sql by email
+        $.ajax({
+            url: SQL_URL + '/UserExist',
+            dataType: 'xml',
+            type: 'POST',
+            data: {
+                "email": `${this.state.email}`,
+                "pass": `${this.state.pass}`
+            },
+            error: (jqXHR, textStatus, errorThrown)=>{
+                console.log(jqXHR, textStatus, errorThrown);
+                
+            },
+            success: (data)=>{
+       
+               if(data.getElementsByTagName('string')[0].innerHTML.length > 0){
+                this.props.history.replace({
+                    pathname: '/charselect',
+                            state: {
+                                email: this.state.email,
+                                userName: data.getElementsByTagName('string')[0].innerHTML 
+                            }
+                        })
+               }else{
+                   alert("incorrect user or password");
+               }
+
+                
+                
             }
-        })
+
+            
+        });
+
+
+        
     }
 
     Register = () => {
@@ -58,8 +90,8 @@ export default class Login extends Component {
             <section id='login'>
                 <div className='form'>
                     <form onSubmit={this.sub}>
-                        <input type="email" placeholder='E-mail' className='white' />
-                        <input type="text" placeholder='Password' />
+                        <input type="email" placeholder='E-mail' className='white' value={this.state.email} onChange={this.emailChange}/>
+                        <input type="text" placeholder='Password' value={this.state.pass} onChange={this.passChange}/>
                         <input type="submit" value="Log-In" className="button" />
                         <input type="button" value="Register" className="button2" onClick={this.Register} />
                         <div className='google'>
