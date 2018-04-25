@@ -106,13 +106,10 @@ return(0)
 end
 go
 
-exec P_Check_Availability 'Alon' , '1234' , 'email1'
+exec P_Check_Availability 'Alon' , '1234' , 'email1@gmail.com'
 go
 
-exec P_Check_Availability 'Yakir' , '123' , 'email2'
-go
-
-exec P_Check_Availability 'orchay' , '123' , 'email1'
+exec P_Check_Availability 'Yakir' , '123' , 'email2@gmail.com'
 go
 
 select * from Users
