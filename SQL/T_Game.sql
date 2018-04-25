@@ -25,7 +25,7 @@ create TABLE [Users] (
 	[User_Id] int identity(1,1) primary key,
 	[User_Name] [Us_Names] ,
 	[User_Password] [US_Names],
-	[Email] nvarchar(100)	  
+	[Email] nvarchar(30)	  
 )
 GO
 
@@ -60,7 +60,7 @@ GO
 create proc P_Insert_User 
 @Name [Us_Names],
 @Pass [Us_Names],
-@Email nvarchar(100)
+@Email nvarchar(30)
 as
 BEGIN
    Insert [dbo].[Users]
@@ -88,12 +88,31 @@ BEGIN
 END
 go
 
-
-exec P_Insert_User 'cky','qwe123' , 'cky@google.com'
+create proc P_Check_Availability
+@Name [Us_Names],
+@Pass [Us_Names],
+@Email nvarchar(30)
+as
+IF EXISTS
+(select * from [dbo].[Users] where [Email] = @Email)
+begin
+print 'Email Already Exists'
+return(1)
+end
+else
+begin
+exec P_Insert_User @Name,@Pass,@Email
+return(0)
+end
 go
 
+exec P_Check_Availability 'Alon' , '1234' , 'email1'
+go
 
-exec P_Insert_User 'Bogii','123' , 'yakirStupid@gmail.com'
+exec P_Check_Availability 'Yakir' , '123' , 'email2'
+go
+
+exec P_Check_Availability 'orchay' , '123' , 'email1'
 go
 
 select * from Users
