@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './Styles/Fields.css'
-import $ from 'jquery';
+import './Styles/Fields.css';
+import ajax from './AJAX.jsx';
+const AJAX = new ajax();
 
-const SQL_URL = 'http://localhost:49873/WebService.asmx';
 
 export default class Login extends Component {
     constructor(props) {
@@ -35,41 +35,22 @@ export default class Login extends Component {
 
     sub = () => {
     
-        let paramObj = {
-            email: this.state.email,
-            pass: this.state.pass
-        }
-        $.ajax({
-            url: SQL_URL + '/Login',
-            dataType: 'json',
-            type: 'POST',
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(paramObj),
-            error: (jqXHR, textStatus)=>{
-                console.log(jqXHR, textStatus);
-                
-            },
-            success: (data)=>{
-            
-            if(data.d != 'null'){
-                data.d = JSON.parse(data.d);
-               this.props.history.replace({
-                    pathname: '/charselect',
-                            state: {
-                                email: this.state.email,
-                                score: data.d['Score'],
-                                userName: data.d["Name"]
-                            }
-                        })
-               }else{
-                   alert("incorrect Email or Password");
-               }
-            }
-                
-          
-            
-        });
-
+        
+        
+        AJAX.Login(this.state.email , this.state.pass)
+        .then( (json)=> {
+            this.props.history.replace({
+                pathname: '/charselect',
+                        state: {
+                            email: this.state.email,
+                            score: json['Score'],
+                            userName: json["Name"]
+                        }
+                    })
+        })
+        .catch( (err)=>{
+            alert(err);
+        })
 
         
     }
