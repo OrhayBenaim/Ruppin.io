@@ -37,10 +37,17 @@ export default class Register extends Component {
    if(x.length<3)
    flag=false;
    if(flag)
-   //put in DB
-       this.props.history.replace({
-           pathname: '/'
-       })
+   {
+       AJAX.register(this.state.email, this.state.pass,this.state.user)
+           .then((json) => {
+               this.props.history.replace({
+                   pathname: '/',
+               })
+           })
+           .catch((err) => {
+               alert(err);
+           })
+    }
    else
    alert("nope");
    //shake animation 

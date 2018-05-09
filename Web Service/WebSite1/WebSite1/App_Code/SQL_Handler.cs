@@ -10,7 +10,7 @@ using System.Data.SqlClient;
 /// </summary>
 public class SQL_Handler
 {
-    static string ConnectionStr = @"Data Source=DESKTOP-7DK9IUH\SQLEXPRESS;Initial Catalog=T_Game;Integrated Security=True";
+    static string ConnectionStr = @"Data Source=.;Initial Catalog=T_Game;Integrated Security=True";
 
     DataSet ds = new DataSet();
     SqlDataAdapter adtr = null;
@@ -52,4 +52,32 @@ public class SQL_Handler
         return null;
     }
 
+    public int updateScore(int id, int newScore)
+    {
+        SqlConnection con = new SqlConnection(ConnectionStr);
+        SqlCommand cmd = new SqlCommand("P_Update_HighScore", con);
+        cmd.CommandType = CommandType.StoredProcedure;
+        cmd.Parameters.AddWithValue("userID", id);
+        cmd.Parameters.AddWithValue("NewScore", newScore);
+        con.Open();
+        int k = cmd.ExecuteNonQuery();
+        con.Close();
+        return k;
+
+
+    }
+
+    public User Register(string email, string pass, string user)
+    {
+        SqlConnection con = new SqlConnection(ConnectionStr);
+        SqlCommand cmd = new SqlCommand("P_Check_Availability", con);
+        cmd.CommandType = CommandType.StoredProcedure;
+        cmd.Parameters.AddWithValue("Name", user);
+        cmd.Parameters.AddWithValue("Pass", pass);
+        cmd.Parameters.AddWithValue("Email", email);
+        con.Open();
+        int k = cmd.ExecuteNonQuery();
+        con.Close();
+        return null;
+    }
 }

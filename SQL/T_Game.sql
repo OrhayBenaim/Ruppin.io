@@ -106,11 +106,37 @@ return(0)
 end
 go
 
-exec P_Check_Availability 'Alon' , '1234' , 'email1@gmail.com'
+exec P_Check_Availability 'Alon' , '1234' , 'email1'
 go
 
-exec P_Check_Availability 'Yakir' , '123' , 'email2@gmail.com'
+exec P_Check_Availability 'Yakir' , '123' , 'email2'
+go
+
+exec P_Check_Availability 'orchay' , '123' , 'email1'
 go
 
 select * from Users
+
+
+create proc P_Update_HighScore
+@userID int,
+@NewScore int
+as
+
+if exists(select * from [dbo].[High_Score] where [High_Score] < @NewScore AND [User_Id] = @userID)
+ BEGIN
+	update [dbo].[High_Score] set [High_Score] = @NewScore where [User_Id] = @userID
+end
+else 
+begin
+print 'Low or Equal Score'
+end
+go
+
+exec P_Update_HighScore 1 , 400
+go
+
+exec P_Update_HighScore 2,500
+go
+
 

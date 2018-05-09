@@ -29,4 +29,20 @@ public class WebService : System.Web.Services.WebService
         return output;
     }
 
+    [WebMethod]
+    public string Register(string email,string pass ,string user)
+    {
+        User rgs = SQL.Register(email, pass, user);
+        string output = new JavaScriptSerializer().Serialize(rgs);
+        return output;
+
+    }
+
+    [WebMethod]
+    public int UpdateScore(int id , int newScore)
+    {
+        int sc = SQL.updateScore(id, newScore);
+        return sc;
+    }
+
 }
