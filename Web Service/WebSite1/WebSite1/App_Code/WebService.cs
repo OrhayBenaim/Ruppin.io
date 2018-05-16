@@ -32,7 +32,7 @@ public class WebService : System.Web.Services.WebService
     [WebMethod]
     public string Register(string email,string pass ,string user)
     {
-        User rgs = SQL.Register(email, pass, user);
+        int rgs = SQL.Register(email, pass, user);
         string output = new JavaScriptSerializer().Serialize(rgs);
         return output;
 

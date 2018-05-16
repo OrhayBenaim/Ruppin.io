@@ -10,7 +10,7 @@ using System.Data.SqlClient;
 /// </summary>
 public class SQL_Handler
 {
-    static string ConnectionStr = @"Data Source=DESKTOP-PR7E7CC\SQLEXPRESS;Initial Catalog=T_Game;Integrated Security=True";
+    static string ConnectionStr = @"Data Source=DESKTOP-PR7E7CC\SQLEXPRESS;Initial Catalog=T_Game2;Integrated Security=True";
 
     DataSet ds = new DataSet();
     SqlDataAdapter adtr = null;
@@ -67,7 +67,7 @@ public class SQL_Handler
 
     }
 
-    public User Register(string email, string pass, string user)
+    public int Register(string email, string pass, string user)
     {
         SqlConnection con = new SqlConnection(ConnectionStr);
         SqlCommand cmd = new SqlCommand("P_Check_Availability", con);
@@ -78,6 +78,6 @@ public class SQL_Handler
         con.Open();
         int k = cmd.ExecuteNonQuery();
         con.Close();
-        return null;
+        return k;
     }
 }

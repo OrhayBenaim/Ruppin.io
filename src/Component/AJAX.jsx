@@ -12,16 +12,17 @@ let paramObj = {
     pass:pass,
     user:user
 }
+console.log(paramObj);
 
 return new Promise ( (resolve , reject)=> {
 $.ajax({
-url: SQL_URL + '',
+url: SQL_URL + '/Register',
     dataType: 'json',
     type: 'POST',
     contentType: "application/json; charset=utf-8",
     data: JSON.stringify(paramObj),
     error: (jqXHR, textStatus) => {
-        reject("error");
+        reject(jqXHR);
 
     },
     success: (data) => {

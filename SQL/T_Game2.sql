@@ -93,20 +93,14 @@ alter proc P_Check_Availability
 @Pass [Us_Names],
 @Email nvarchar(30)
 as
-IF EXISTS
+IF not EXISTS
 (select * from [dbo].[Users] where [Email] = @Email)
 begin
-print 'Email Already Exists'
-return(1)
-end
-else if(CHARINDEX('@',@Email)>0)
-begin
 exec P_Insert_User @Name,@Pass,@Email
-return(0)
 end
 go
 
-exec P_Check_Availability 'Alon' , '1234' , 'email1'
+exec P_Check_Availability 'Alon2222' , '1234' , 'email1'
 go
 
 exec P_Check_Availability 'Yakir' , '123' , 'email2'
