@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import Player from './Player';
 import io from 'socket.io-client';
-
 import './Styles/Game.css';
 
-const ip = '109.65.83.228';
+const ip = 'localhost';
 
 
 export default class GameLogic extends Component {

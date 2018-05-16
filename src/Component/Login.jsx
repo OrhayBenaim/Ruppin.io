@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './Styles/Fields.css';
-import ajax from './AJAX.jsx';
-const AJAX = new ajax();
+import './Styles/Fields.css'
+import $ from 'jquery';
 
+const SQL_URL = 'http://localhost:49873/WebService.asmx';
 
 export default class Login extends Component {
     constructor(props) {
@@ -33,24 +33,43 @@ export default class Login extends Component {
 
 
 
-    sub = () => {
-    
-        
-        
-        AJAX.Login(this.state.email , this.state.pass)
-        .then( (json)=> {
-            this.props.history.replace({
-                pathname: '/charselect',
-                        state: {
-                            email: this.state.email,
-                            score: json['Score'],
-                            userName: json["Name"]
-                        }
-                    })
-        })
-        .catch( (err)=>{
-            alert(err);
-        })
+    sub = (e) => {
+        e.preventDefault();
+        let paramObj = {
+            email: this.state.email,
+            pass: this.state.pass
+        }
+        $.ajax({
+            url: SQL_URL + '/Login',
+            dataType: 'json',
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(paramObj),
+            error: (jqXHR, textStatus)=>{
+                console.log(jqXHR, textStatus);
+                
+            },
+            success: (data)=>{
+            
+            if(data.d != 'null'){
+                data.d = JSON.parse(data.d);
+               this.props.history.replace({
+                    pathname: '/charselect',
+                            state: {
+                                email: this.state.email,
+                                score: data.d['Score'],
+                                userName: data.d["Name"]
+                            }
+                        })
+               }else{
+                   alert("incorrect Email or Password");
+               }
+            }
+                
+          
+            
+        });
+
 
         
     }
@@ -70,23 +89,19 @@ export default class Login extends Component {
 
     render() {
         return (
-            <section id='login'>
-                <div className='form'>
-                  
-                        <input type="email" placeholder='E-mail' className='white' value={this.state.email} onChange={this.emailChange}/>
-                        <input type="text" placeholder='Password' value={this.state.pass} onChange={this.passChange}/>
-                        <input onClick={this.sub} type="submit" value="Log-In" className="button" />
-                        <input type="button" value="Register" className="button2" onClick={this.Register} />
-                        <div className='google'>
-                            <a href=""><img src="/images/google.png" alt="" /></a>
-                        </div>
-                        <div className='facebook'>
-                            <a href=""> <img src="/images/facebook.png" alt="" /> </a>
-                        </div>
-                    
-                </div>
-                <img id="soundImg" onClick={this.imgChange} src={this.state.img} alt="" />
-            </section>
+            <div className="clouds">    
+            <div className="login">
+                <form onSubmit={this.sub} >
+                    <input type="email" placeholder="E-mail" value={this.state.email} onChange={this.emailChange} />
+                    <input type="password" placeholder="Password" value={this.state.pass} onChange={this.passChange} />
+                    <input type="submit" value="Login" />
+                    <input type="button" value="Register" onClick={this.Register} />
+                </form>
+                
+             </div>
+            <input type="button" className="sound" onClick={this.imgChange} src={this.state.img} />
+            </div>
+
         );
     }
 }

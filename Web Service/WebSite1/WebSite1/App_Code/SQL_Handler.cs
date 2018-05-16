@@ -10,7 +10,7 @@ using System.Data.SqlClient;
 /// </summary>
 public class SQL_Handler
 {
-    static string ConnectionStr = @"Data Source=.;Initial Catalog=T_Game;Integrated Security=True";
+    static string ConnectionStr = @"Data Source=DESKTOP-PR7E7CC\SQLEXPRESS;Initial Catalog=T_Game;Integrated Security=True";
 
     DataSet ds = new DataSet();
     SqlDataAdapter adtr = null;

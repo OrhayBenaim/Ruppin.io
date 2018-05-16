@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './Styles/Fields.css';
 import * as FontAwesome from 'react-icons/lib/fa'
+import ajax from './AJAX';
+const AJAX = new ajax();
 
 export default class Register extends Component {
 
@@ -24,33 +26,30 @@ export default class Register extends Component {
 
     Submitted = (event) => {
         event.preventDefault();
-        let flag=true;
-      let x=this.state.valids;
-   for(let i=0;i<x.length;i++)
-   {
-       console.log(x[i]);
-       if(x[i]==false)
-       {
-       flag=false
-       }
-   }
-   if(x.length<3)
-   flag=false;
-   if(flag)
-   {
-       AJAX.register(this.state.email, this.state.pass,this.state.user)
-           .then((json) => {
-               this.props.history.replace({
-                   pathname: '/',
-               })
-           })
-           .catch((err) => {
-               alert(err);
-           })
-    }
-   else
-   alert("nope");
-   //shake animation 
+        let flag = true;
+        let x = this.state.valids;
+        for (let i = 0; i < x.length; i++) {
+            console.log(x[i]);
+            if (x[i] == false) {
+                flag = false
+            }
+        }
+        if (x.length < 3)
+            flag = false;
+        if (flag) {
+            AJAX.register(this.state.email, this.state.pass, this.state.user)
+                .then((json) => {
+                    this.props.history.replace({
+                        pathname: '/',
+                    })
+                })
+                .catch((err) => {
+                    alert(err);
+                })
+        }
+        else
+            alert("nope");
+        //shake animation 
     }
 
     imgChange = () => {
@@ -63,9 +62,9 @@ export default class Register extends Component {
 
     userChange = (e) => {
         let nick = e.target.value;
-        this.setState( () => {
+        this.setState(() => {
             let temp = this.state.valids;
-            if(nick.length > 8){
+            if (nick.length > 8) {
                 temp[0] = false;
                 return {
                     valids: temp,
@@ -73,8 +72,8 @@ export default class Register extends Component {
                 }
             }
             temp[0] = true;
-            
-            return{
+
+            return {
                 valids: temp,
                 user: nick
             }
@@ -95,58 +94,50 @@ export default class Register extends Component {
 
             return {
                 valids: temp,
-                email:mail
+                email: mail
             }
         })
     }
     passChange = (e) => {
         let password = e.target.value;
-        this.setState({pass:password})
+        this.setState({ pass: password })
     }
-    changeRepPass = (e) =>{
-        let passchk=e.target.value;
-        this.setState(()=>{
-        let temp=this.state.valids;
-        if(passchk!=this.state.pass)
-        {
-        temp[2]=false;
-        return{
-            valids:temp,
-            repPass:passchk
-              }
-        }
-        temp[2]=true;
-        return{
-            valids: temp,
-            repPass: passchk
-         }
+    changeRepPass = (e) => {
+        let passchk = e.target.value;
+        this.setState(() => {
+            let temp = this.state.valids;
+            if (passchk != this.state.pass) {
+                temp[2] = false;
+                return {
+                    valids: temp,
+                    repPass: passchk
+                }
+            }
+            temp[2] = true;
+            return {
+                valids: temp,
+                repPass: passchk
+            }
         })
     }
 
     render() {
         return (
-            <section id='login'>
-                <div className='form'>
-                <div className='fa fa-check' style= { {width:'10pt', height:'10pt'} }></div>
-                    <form onSubmit={this.Submitted}>
-                        <input type="text" onChange={this.userChange} placeholder='Nickname' value={this.state.user}/>
-                        <FontAwesome.FaCheck className='icon' style = { {visibility: this.state.valids[0] ? 'visible' : 'hidden'} }/>
-                        <FontAwesome.FaClose className='icon' style = { {visibility: this.state.valids[0] | this.state.valids[0] ==undefined ? 'hidden' : 'visible'} }/>
+
+            <div className="clouds">
+                <div className="login">
+                    <form onSubmit={this.Submitted} >
+                        <input type="text" onChange={this.userChange} placeholder='Nickname' value={this.state.user} />
                         <input type="email" onChange={this.emailChange} placeholder='E-mail' value={this.state.email} />
-                        <FontAwesome.FaCheck className='icon1' style={{ visibility: this.state.valids[1] ? 'visible' : 'hidden' }} />
-                        <FontAwesome.FaClose className='icon1' style={{ visibility: this.state.valids[1] | this.state.valids[1] == undefined ? 'hidden' : 'visible' }} />
                         <input type="password" onChange={this.passChange} placeholder='Password' value={this.state.pass} />
                         <input type="password" onChange={this.changeRepPass} placeholder='Repeat Password' value={this.state.repPass} />
-                        <FontAwesome.FaCheck className='icon2' style={{ visibility: this.state.valids[2] ? 'visible' : 'hidden' }} />
-                        <FontAwesome.FaClose className='icon2' style={{ visibility: this.state.valids[2] | this.state.valids[2] == undefined ? 'hidden' : 'visible' }} />
-                        
-                        <input type="submit" value='Register' className='register' />
-                        <input type='button' value='Cancel' className='cancel' onClick={this.Cancel} />
+                        <input type="submit" value="Register" />
+                        <input type="button" value="Cancel" onClick={this.Cancel} />
                     </form>
-                </div>
-                <img alt = '' onClick={this.imgChange} srcSet={this.state.img} className='sound' />
-            </section>
 
+                </div>
+                <input type="button" className="sound" onClick={this.imgChange} src={this.state.img} />
+            </div>
         )
     }
 };
