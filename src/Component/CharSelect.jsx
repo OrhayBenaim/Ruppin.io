@@ -1,59 +1,67 @@
 import React, { Component } from 'react';
-import './Styles/CharSelect.css';
+import './Styles/Styles.css';
 
 export default class CharSelect extends Component {
-    constructor(props)
-    {
+    constructor(props) {
         super(props);
-        this.state = {  };
+        this.state = {};
     }
-    
+
     handleClick = (e) => {
-        
+
         let target = e.target;
 
-        this.setState( (pervState)=>{
-            if(pervState.element !== target){
-                if(!target.classList.contains('imgPop')){
+        this.setState((pervState) => {
+
+            if (pervState.element !== target) {
+                if (!target.classList.contains('imgPop')) {
                     target.classList.toggle('imgPop');
                 }
-                
 
-                if (pervState.element !== undefined && pervState.element.classList.contains('imgPop')){
+
+                if (pervState.element !== undefined && pervState.element.classList.contains('imgPop')) {
                     pervState.element.classList.toggle('imgPop');
                     pervState.element.classList.toggle('imgPush');
                     setTimeout(() => {
                         pervState.element.classList.toggle('imgPush');
                     }, 1000);
-                    
-                }
-                return{element: target};
-            }
-            else{
-                //ENTER GAMER!
 
-               this.props.history.replace({
-                pathname: '/game',
-                state: {
-                    characterID: this.state.element.id,
-                    playerName: this.props.location.state.userName,
-                    email: this.props.location.state.email
                 }
-               });
-                
-
+                return { element: target };
             }
+          
         })
     }
-  render() {
-      
-    return (
-        <div className="blue">
-            <img alt='Character 1' id="1" src="/images/Character_1.svg" className="avatar" onClick={this.handleClick} />
-            <img alt='Character 2' id="2" src="/images/Character_2.svg" className="avatar" onClick={this.handleClick} />
-            <img alt='Character 3' id="3" src="/images/Character_3.svg" className="avatar" onClick={this.handleClick} />
-            <img alt='Character 4' id="4" src="/images/Character_4.svg" className="avatar" onClick={this.handleClick} />
-        </div>
-    )
-  }
+
+Start = () =>{
+    if(this.state.element != undefined){
+    this.props.history.replace({
+        pathname: '/menu',
+        state: {
+            characterID: this.state.element.id,
+            playerName: this.props.location.state.userName,
+            email: this.props.location.state.email
+        }
+    });
+}
+}
+
+    render() {
+
+        return (
+
+            <section id="player">
+                <h1>SELECT YOUR PLAYER</h1>
+                <div className="container">
+                    <div className="select" onClick={this.handleClick}><img id="Yellow" src="images/fish1.png" /></div>
+                    <div className="select" onClick={this.handleClick}><img id="Orange"  src="images/fish2.png" /></div>
+                    <div className="select" onClick={this.handleClick}><img id="Blue" src="images/fish3.png" /></div>
+                    <div className="select" onClick={this.handleClick}><img id="Purple" src="images/fish4.png" /></div>
+                </div>
+                <a className="approve" onClick={this.Start}><img src="images/select.png" /></a>
+                
+                <a className="back"  onClick={()=> {this.props.history.replace("/")}}><img src="images/back.png" /></a>
+            </section>
+        )
+    }
 };

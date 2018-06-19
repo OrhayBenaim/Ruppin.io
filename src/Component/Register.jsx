@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Styles/Fields.css';
+import './Styles/Styles.css';
 import * as FontAwesome from 'react-icons/lib/fa'
 import ajax from './AJAX';
 const AJAX = new ajax();
@@ -53,19 +53,24 @@ export default class Register extends Component {
     render() {
         return (
 
-            <div className="clouds">
-                <div className="login">
+            <section id="login">
+                <div className="form">
                     <form onSubmit={this.onSubmit} >
-                        <input required name='nick' type="text" onChange={this.handleChange} placeholder='Nickname' value={this.state.nick} />
-                        <input required name='email' type="email" onChange={this.handleChange} placeholder='E-mail' value={this.state.email} />
-                        <input required name='pass' type="password" onChange={this.handleChange} placeholder='Password' value={this.state.pass} />
-                        <input type="submit" value="Register" />
-                        <input type="button" value="Cancel" onClick={this.Cancel} />
-                    </form>
+                        <input type="text" placeholder="Nickname" onChange={this.handleChange} value={this.state.nick} />
+                        <input type="text" placeholder="Password" onChange={this.handleChange} value={this.state.email} />
+                        <input type="text" placeholder="Repeat Password" />
+                        <input type="text" placeholder="E-mail" onChange={this.handleChange} value={this.state.pass} />
+                        <div className="kaftor">
+                            <input type="button" value="Log-In" className="register" />
 
+                            <input type="button" value="Cancel" className="cancel" onClick={this.Cancel} />
+
+                        </div>
+                    </form>
                 </div>
-                <input type="button" className="sound" onClick={this.imgChange} src={this.state.img} />
-            </div>
+                <img src="images/sound-on.png" className="sound" onClick={this.imgChange} src={this.state.img} />
+            </section>
+
         )
     }
 };

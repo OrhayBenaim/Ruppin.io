@@ -4,7 +4,6 @@ const smoothing = 50;
 const radius = 30;
 
 
-
 export default class Player extends Component {
 
 
@@ -18,7 +17,7 @@ export default class Player extends Component {
             angle: 0
         }
 
-        this.avatar = `/images/Character_${this.props.avatar}.svg`;
+        this.avatar = `/images/SVG/${this.props.avatar}.svg`;
         this.update =null;
     }
 
@@ -26,11 +25,13 @@ export default class Player extends Component {
 
     componentDidMount(){
 
+        const gameboard =  document.getElementById("game");
         
        this.update = setInterval( ()=>{//when we create the component start a interval
             this.setState((pervState) =>{//every 32ms state need to be updated
-                if( (this.state.x > 720 - 30 || this.state.y > 720 - 30 ) ||
-                    ( pervState.x === this.props.x && pervState.y === this.props.y) ){//if out of range
+                if( (this.state.x > gameboard.clientWidth - 50 || this.state.y > gameboard.clientHeight - 120 || this.state.x < 50 || this.state.y < 0) &&
+                    (this.props.x > gameboard.clientWidth - 50 || this.props.y > gameboard.clientHeight - 120 || this.props.x < 50 || this.props.y < 0) )
+                {//if out of range
                     return {x: pervState.x , y: pervState.y}//set state to pervious state so no change
                 }
                 else{
@@ -57,8 +58,8 @@ componentWillUnmount(){
   render() {
     return (
             // moving the player using css left and top
-            <div className='players' style={ {left: this.state.x - radius, top: this.state.y + radius} }>
-                <img alt='' id = 'player' srcSet={this.avatar} style={ {transform: `rotate(${( (this.state.angle * 180) / Math.PI) + 90}deg)` } }/>
+            <div className='players' style={ {left: this.state.x - radius, top: this.state.y + radius, position:'absolute'} }>
+                <img alt='' id = 'player' srcSet={this.avatar} style={ {width: 50,transform: `rotate(${( (this.state.angle * 180) / Math.PI) + 90}deg)` } }/>
                 <p>{this.props.userName}</p>
             </div>
         
