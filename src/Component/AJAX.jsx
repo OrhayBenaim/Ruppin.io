@@ -12,7 +12,7 @@ let paramObj = {
     pass:pass,
     user:user
 }
-console.log(paramObj);
+
 
 return new Promise ( (resolve , reject)=> {
 $.ajax({
@@ -38,6 +38,26 @@ url: SQL_URL + '/Register',
 
 })
 
+}
+
+    GetHighScore(){
+    return new Promise( (resolve , reject)=> {
+        $.ajax({
+            url: SQL_URL + '/GetHighScore',
+            dataType: 'json',
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            error: (jqXHR, textStatus) => {
+                reject("error");
+
+            },
+            success: (data) => {
+                data.d = JSON.parse(data.d);
+                 resolve(data.d);
+            }
+
+        });
+    })
 }
 
  Login(email , pass){

@@ -212,6 +212,7 @@ section#start a.startgame
 	background-color: #c0db5d;
 	border-radius: 20px;
 	padding: 20px 30px 20px 30px;
+	z-index: 0;
 }
 
 section#start a.chart
@@ -260,6 +261,11 @@ section#scubaduba a.title
      -moz-text-stroke-width: 1px;  
   -webkit-text-stroke-width: 1px;
 	
+}
+table,
+th,
+td {
+	border: 1px solid black;
 }
 section#scubaduba a.slide
 {

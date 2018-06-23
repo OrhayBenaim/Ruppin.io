@@ -56,12 +56,11 @@ export default class Register extends Component {
             <section id="login">
                 <div className="form">
                     <form onSubmit={this.onSubmit} >
-                        <input type="text" placeholder="Nickname" onChange={this.handleChange} value={this.state.nick} />
-                        <input type="text" placeholder="Password" onChange={this.handleChange} value={this.state.email} />
-                        <input type="text" placeholder="Repeat Password" />
-                        <input type="text" placeholder="E-mail" onChange={this.handleChange} value={this.state.pass} />
+                        <input type="text" placeholder="Nickname" name='nick' onChange={this.handleChange} value={this.state.nick} />
+                        <input type="text" placeholder="Password" name='pass' onChange={this.handleChange} value={this.state.pass} />
+                        <input type="text" placeholder="E-mail" name='email' onChange={this.handleChange} value={this.state.email} />
                         <div className="kaftor">
-                            <input type="button" value="Log-In" className="register" />
+                            <input type="submit" value="Register" className="register" />
 
                             <input type="button" value="Cancel" className="cancel" onClick={this.Cancel} />
 

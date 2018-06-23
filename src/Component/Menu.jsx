@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
+import Modal from './modals/modal';
+import ajax from './AJAX';
+import './Styles/Styles.css';
+const AJAX = new ajax();
 
 export default class Menu extends Component {
+    constructor(props) {
+        super(props);
 
+        this.state = {
+            show: false,
+            Score:[]
+        }
+    }
 Start = () =>{
     this.props.history.replace({
         pathname: '/intro',
@@ -21,20 +32,62 @@ Back = () => {
         }
     })
 }
+    showModal = () => {
+        this.setState({show: !this.state.show}, ()=>{
+            if(this.state.show)
+            {
 
+                AJAX.GetHighScore()
+                    .then((json) => {
+                        let Score = json.map((user) => {
+                            return <div> 
+                                <div>
+                                    
+                                    <table style={{borderCollapse: 'collapse'}}>
+                                        <tr>
+                                            <th >ID</th>
+                                            <th>Name</th>
+                                            <th>Highest Score</th>
+                                        </tr>
+                                        <tr>
+                                            <td>{user.User_Id}</td>
+                                             <td>{user.User_Name}</td>
+                                             <td>{user.High_Score}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                </div>
+                                 })
+                  this.setState({Score})
+                    
+                    })
+                    .catch((err) => {
+                        alert(err);
+                    })
+            }
+        });
+    }
     render() {
         return (
-            <section id="start">
+            <div>
 
+
+            <section id="start">
+              
                 <a className="back" onClick={this.Back}><img src="images/back.png" /></a>
                 <div className="container">
                     <a className="startgame" onClick={this.Start}>START GAME</a>
-                    <a className="chart"><img src="images/chart.png" /></a>
+                    <a className="chart" onClick={this.showModal}><img src="images/chart.png" /></a>
                     <a className="exit" onClick={ ()=> {this.props.history.replace("/")}}><img src="images/exit.png" /></a>
-
+          
                 </div>
 
             </section>
+                <Modal show={this.state.show}  >
+                    {this.state.Score}
+                    </Modal> 
+            </div>
         )
     }
 };
