@@ -45,4 +45,10 @@ public class WebService : System.Web.Services.WebService
         return sc;
     }
 
+        [WebMethod]
+    public string GetHighScore()
+    {
+        return SQL.GetHighScore();
+    }
+
 }

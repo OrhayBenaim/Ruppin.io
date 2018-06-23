@@ -80,4 +80,24 @@ public class SQL_Handler
         con.Close();
         return k;
     }
+
+    
+    public string GetHighScore()
+    {
+        SqlConnection con = new SqlConnection(ConnectionStr);
+        ds.Clear();
+        adtr = new SqlDataAdapter($"SELECT TOP 10 * FROM High_Score ORDER BY High_Score DESC", con);
+        adtr.Fill(ds, "High_Score");
+        var Scores = new List<Dictionary<string, object>>();
+        for(int i = 0; i < ds.Tables["High_Score"].Rows.Count; i++)
+        {
+            var User = new Dictionary<string, object>();
+            foreach (DataColumn col in ds.Tables["High_Score"].Rows[i].Table.Columns)
+            {
+                User.Add(col.ColumnName, ds.Tables["High_Score"].Rows[i][col]);
+            }
+            Scores.Add(User);
+        }
+        return new JavaScriptSerializer().Serialize(Scores); ;
+    }
 }
