@@ -4,13 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Data;
 using System.Data.SqlClient;
+using System.Web.Script.Serialization;
 
 /// <summary>
 /// Summary description for Class1
 /// </summary>
 public class SQL_Handler
 {
-    static string ConnectionStr = @"Data Source=DESKTOP-PR7E7CC\SQLEXPRESS;Initial Catalog=T_Game2;Integrated Security=True";
+    static string ConnectionStr = @"Data Source=COM\SQLEXPRESS;Initial Catalog=T_Game2;Integrated Security=True";
 
     DataSet ds = new DataSet();
     SqlDataAdapter adtr = null;
