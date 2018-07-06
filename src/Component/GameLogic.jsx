@@ -5,8 +5,8 @@ import './Styles/Styles.css';
 
 const ip = 'localhost';
 
-
-
+let gameboard = null;
+let player = {}
 export default class GameLogic extends Component {
 
   constructor(props) {
@@ -22,12 +22,14 @@ export default class GameLogic extends Component {
     this.socket = io(`${ip}:3001`);
     this.Players = {};
 
-    this.socket.emit('p.pos', JSON.stringify({
+    player = {
       x: this.state.x,
       y: this.state.y,
       userName: this.userName,
+      Eating: false,
       avatar: this.avatar
-    }));
+    }
+    this.socket.emit('p.pos', JSON.stringify( player ));
 
   }
 
@@ -35,21 +37,35 @@ export default class GameLogic extends Component {
 
   componentDidMount() {
 
-
-    this.socket.on('p.pos', (msg) => {// need to change to recive array of players
+    gameboard =  document.getElementById("game");
+    this.socket.on('p.pos', (msg) => {
       this.Players = {};
       let data = JSON.parse(msg);
 
+      for(let ply of data){
+        if(ply.id == this.socket.id){
+          this.setState({
+            x: ply.x,
+            y: ply.y,
+            angle: ply.angle
+          });
+        }
+        
+      }
+      
+      
       data = data.filter(ply => ply.id !== this.socket.id);
 
       data.forEach(ply => {
         this.Players[ply.id] =
-          <Player key={ply.id} x={ply.x} y={ply.y} userName={ply.name} avatar={ply.avatar} />
+          <Player key={ply.id} angle={ply.angle} x={ply.x} y={ply.y} userName={ply.name} avatar={ply.avatar} />
 
       });
       this.forceUpdate();
 
     })
+
+   
 
   }
 
@@ -60,19 +76,15 @@ export default class GameLogic extends Component {
 
     let x = e.type === 'touchmove' ? e.targetTouches[0].pageX : e.pageX;
     let y = e.type === 'touchmove' ? e.targetTouches[0].pageY : e.pageY
-    let data = {
-      x: x,
-      y: y,
-      userName: this.userName,
-      avatar: this.avatar
+
+    player.x = x;
+    player.y = y;
+    
+    if( !(this.x > gameboard.clientWidth || this.y > gameboard.clientHeight - 120 || this.x < 50 || this.y < 50) &&
+      !(this.state.x > gameboard.clientWidth|| this.state.y > gameboard.clientHeight - 120 || this.state.x < 0 || this.state.y < 0) ){
+        this.socket.emit('p.pos', JSON.stringify(player));
     }
-
-    this.socket.emit('p.pos', JSON.stringify(data));
-
-    this.setState({
-      x: x,
-      y: y
-    });
+  
 
   }
 
@@ -83,7 +95,7 @@ export default class GameLogic extends Component {
 
       {Object.values(this.Players)}
 
-      <Player x={this.state.x} y={this.state.y} userName={this.userName} avatar={this.avatar} />
+      <Player x={this.state.x}  angle={this.state.angle} y={this.state.y} userName={this.userName} avatar={this.avatar} />
 
         <a className="sound"><img src="images/soundexit.png" /></a>
         <h2>1058</h2>
