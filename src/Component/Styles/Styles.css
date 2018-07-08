@@ -298,6 +298,14 @@ section#game h2
 	border-radius: 15px;
 }
 
+.btn_eat{
+	position: fixed;
+	bottom: 5vh;
+	left: 5vh;
+	background-image: url('/images/btn_eat.png');
+	width: 5vh;
+	height: 5vh;
+}
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: #466ba6;

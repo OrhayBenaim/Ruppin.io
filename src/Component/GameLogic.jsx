@@ -64,7 +64,18 @@ export default class GameLogic extends Component {
       this.forceUpdate();
 
     })
-
+    this.socket.on('p.dead', (dead_player)=>{
+      if (this.socket.id!=dead_player){
+        this.props.history.replace({
+          pathname: '/manu',
+          state: {
+            characterID: this.avatar,
+            playerName: this.userName,
+            email: this.email,
+          }
+        })
+      }
+    })
    
 
   }
@@ -87,12 +98,16 @@ export default class GameLogic extends Component {
   
 
   }
+eat = () => {
+player.Eating=true;          
+}
+
 
   render() {
     return (
 
       <section id="game" onTouchMove = {this.getPosition} onMouseMove = {this.getPosition}>
-
+      <div className='btn_eat' />
       {Object.values(this.Players)}
 
       <Player x={this.state.x}  angle={this.state.angle} y={this.state.y} userName={this.userName} avatar={this.avatar} />
