@@ -99,7 +99,9 @@ export default class GameLogic extends Component {
 
   }
 eat = () => {
-player.Eating=true;          
+player.Eating=true;    
+console.log(player.Eating);
+      
 }
 
 
@@ -107,7 +109,7 @@ player.Eating=true;
     return (
 
       <section id="game" onTouchMove = {this.getPosition} onMouseMove = {this.getPosition}>
-      <div className='btn_eat' />
+      <div className='btn_eat' onClick={this.eat}/>
       {Object.values(this.Players)}
 
       <Player x={this.state.x}  angle={this.state.angle} y={this.state.y} userName={this.userName} avatar={this.avatar} />

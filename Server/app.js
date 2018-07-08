@@ -27,6 +27,7 @@ io.on('connection', function(socket){
 
     players[socket.id]={
       id: socket.id,
+      Eating:data.Eating,
       x: data.x,
       y: data.y
     }
@@ -42,7 +43,6 @@ io.on('connection', function(socket){
         id: socket.id,
         x: data.x,
         y: data.y,
-        Eating:data.Eating,
         name: data.userName,
         avatar: data.avatar
       }
@@ -110,8 +110,9 @@ function Eat(Eater,Eaten) {
   let d=Distance(updated_players[Eater], updated_players[Eaten])
   
   
-  if(updated_players[Eater].Eating === true&& updated_players[Eaten].Eating === false)
+  if(players[Eater].Eating === true&& players[Eaten].Eating === false)
   {
+    
     if (d < _EAT_DISTANCE)
     {
       io.to(Eaten).emit('p.dead' , Eaten);
