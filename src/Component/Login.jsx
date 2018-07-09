@@ -74,7 +74,7 @@ export default class Login extends Component {
                 <div className="form">
                     <form onSubmit={this.sub} >
                         <input type="text" placeholder="E-mail" className="white" value={this.state.email} onChange={this.emailChange} />
-                        <input type="text" placeholder="Password" value={this.state.pass} onChange={this.passChange} />
+                        <input type="password" placeholder="Password" value={this.state.pass} onChange={this.passChange} />
                         <input type="submit" value="Log-In" className="button" />
                         <input type="button" value="Register" className="button2" onClick={this.Register} />
                     </form>

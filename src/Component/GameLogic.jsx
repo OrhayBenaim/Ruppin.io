@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Player from './Player';
 import io from 'socket.io-client';
 import './Styles/Styles.css';
+import PopUP from './PopUp';
 
 const ip = 'localhost';
 
@@ -13,7 +14,9 @@ export default class GameLogic extends Component {
     super(props);
     this.state = {
       x: 100 + Math.random() * 100,
-      y: 20 + Math.random() * 100
+      y: 20 + Math.random() * 100,
+      Players: {},
+      showPop: true
     }
 
     this.email = this.props.location.state.email;
@@ -61,19 +64,13 @@ export default class GameLogic extends Component {
           <Player key={ply.id} angle={ply.angle} x={ply.x} y={ply.y} userName={ply.name} avatar={ply.avatar} />
 
       });
-      this.forceUpdate();
+      this.setState({Players: this.Players})
 
     })
     this.socket.on('p.dead', (dead_player)=>{
-      if (this.socket.id!=dead_player){
-        this.props.history.replace({
-          pathname: '/manu',
-          state: {
-            characterID: this.avatar,
-            playerName: this.userName,
-            email: this.email,
-          }
-        })
+
+      if (this.socket.id == dead_player){
+        this.setState({showPop: true})
       }
     })
    
@@ -81,7 +78,20 @@ export default class GameLogic extends Component {
   }
 
 
-
+closePop = () => {
+  
+  this.setState({showPop: false} , ()=> {
+    this.props.history.replace({
+      pathname: '/menu',
+      state: {
+        characterID: this.avatar,
+        playerName: this.userName,
+        email: this.email,
+      }
+    })
+  })
+  
+}
   getPosition = (e) => {
     e.preventDefault();
 
@@ -93,15 +103,16 @@ export default class GameLogic extends Component {
     
     if( !(this.x > gameboard.clientWidth || this.y > gameboard.clientHeight - 120 || this.x < 50 || this.y < 50) &&
       !(this.state.x > gameboard.clientWidth|| this.state.y > gameboard.clientHeight - 120 || this.state.x < 0 || this.state.y < 0) ){
-        this.socket.emit('p.pos', JSON.stringify(player));
+        if(!this.state.showPop){
+          this.socket.emit('p.pos', JSON.stringify(player));
+        }
     }
   
 
   }
 eat = () => {
-player.Eating=true;    
-console.log(player.Eating);
-      
+
+      player.Eating = true;
 }
 
 
@@ -109,14 +120,19 @@ console.log(player.Eating);
     return (
 
       <section id="game" onTouchMove = {this.getPosition} onMouseMove = {this.getPosition}>
+     
       <div className='btn_eat' onClick={this.eat}/>
-      {Object.values(this.Players)}
+      {Object.values(this.state.Players)}
 
       <Player x={this.state.x}  angle={this.state.angle} y={this.state.y} userName={this.userName} avatar={this.avatar} />
 
         <a className="sound"><img src="images/soundexit.png" /></a>
         <h2>1058</h2>
-
+        
+        {
+          this.state.showPop ?
+          <PopUP closePopup = {this.closePop} score={1050} highScore={250}/> : null
+        }
       </section>
     );
   }
