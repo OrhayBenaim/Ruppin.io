@@ -42,7 +42,7 @@ export default class Login extends Component {
                     pathname: '/charselect',
                     state: {
                         email: this.state.email,
-                        score: json.Socre,
+                        score: json.Score,
                         userName: json.Name
                     }
                 })

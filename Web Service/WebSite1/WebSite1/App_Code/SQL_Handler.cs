@@ -53,12 +53,12 @@ public class SQL_Handler
         return null;
     }
 
-    public int updateScore(int id, int newScore)
+    public int updateScore(string email, int newScore)
     {
         SqlConnection con = new SqlConnection(ConnectionStr);
         SqlCommand cmd = new SqlCommand("P_Update_HighScore", con);
         cmd.CommandType = CommandType.StoredProcedure;
-        cmd.Parameters.AddWithValue("userID", id);
+        cmd.Parameters.AddWithValue("Email", email);
         cmd.Parameters.AddWithValue("NewScore", newScore);
         con.Open();
         int k = cmd.ExecuteNonQuery();

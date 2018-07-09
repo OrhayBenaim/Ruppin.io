@@ -94,6 +94,32 @@ return new Promise( (resolve , reject)=> {
 }
 
 
-
+UpdateScore(email , score){
+    return new Promise( (resolve , reject)=> {
+        $.ajax({
+            url: SQL_URL + '/UpdateScore',
+            dataType: 'json',
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({
+                email: email,
+                newScore: score
+            }),
+            error: (jqXHR, textStatus)=>{
+                reject("error");
+                
+            },
+            success: (data)=>{
+            
+            if(data.d != 'null'){
+                data.d = JSON.parse(data.d);
+                resolve(data.d);
+               }
+            }
+            
+        });
+    
+    })
+}
 
 }

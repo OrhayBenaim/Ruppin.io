@@ -32,8 +32,11 @@ componentWillUnmount(){
             // moving the player using css left and top
             <div className='players' style={ {left: this.props.x - radius, top: this.props.y + radius, position:'absolute', transform: 'translate(0px, -50px) '} }>
                 <img alt='' id = 'player' srcSet={this.avatar} style={ {width: 50,transform: `rotate(${( (this.props.angle * 180) / Math.PI) + 90}deg)` } }/>
-                <p>{this.props.userName}</p>
-                
+               {this.props.eating ? 
+                    <div className='shield'/>
+                    :
+                    null
+                }
             </div>
         
     )

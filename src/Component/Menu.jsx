@@ -19,7 +19,8 @@ Start = () =>{
         state: {
             characterID: this.props.location.state.characterID,
             playerName: this.props.location.state.playerName,
-            email: this.props.location.state.email
+            email: this.props.location.state.email,
+            score: this.props.location.state.score
         }
     });
 }

@@ -39,9 +39,9 @@ public class WebService : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public int UpdateScore(int id , int newScore)
+    public int UpdateScore(string email , int newScore)
     {
-        int sc = SQL.updateScore(id, newScore);
+        int sc = SQL.updateScore(email, newScore);
         return sc;
     }
 

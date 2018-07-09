@@ -113,16 +113,11 @@ select * from Users
 
 
 
-create proc P_Update_HighScore
-@userID int,
+alter proc P_Update_HighScore
+@Email nvarchar(30),
 @NewScore int
 as
-
-	update [dbo].[High_Score] set [High_Score] = @NewScore where [User_Id] = @userID AND [High_Score]<@NewScore
-go
-
-exec P_Update_HighScore 1 , 555
-go
-
-exec P_Update_HighScore 2,500
+	declare @id int
+	set @id = (select [User_Id] from Users where [Email] = @Email)
+	update [dbo].[High_Score] set [High_Score] = @NewScore where [User_Id] = @id AND [High_Score]<@NewScore
 go

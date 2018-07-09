@@ -388,7 +388,15 @@ section#game h2
 	  color: hotpink ;
   }
 
-
+.shield{
+	width: 70px;
+	height: 70px;
+	border-radius: 50%;
+	border: 2px solid #f4de11;
+	position: absolute;
+	top: -10px;
+	left: -10px
+}
   @keyframes showbox{
   
 	0% {

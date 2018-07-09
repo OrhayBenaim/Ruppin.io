@@ -44,17 +44,29 @@ io.on('connection', function(socket){
         x: data.x,
         y: data.y,
         name: data.userName,
-        avatar: data.avatar
+        avatar: data.avatar,
       }
     
     }
- 
+    
   });
 
-  socket.on('p.pos', function(msg){ 
-    updated_players[socket.id].Eaten = true;
-  })
-  
+  socket.on('p.eat', function(msg){ 
+    
+    let data = JSON.parse(msg);
+
+    updated_players[socket.id].Eating = data.Eating;
+  });
+
+
+
+  socket.on('p.leave', function(){ 
+
+    delete players[socket.id]; 
+    delete updated_players[socket.id];
+  });
+
+
 });
 
 setInterval( ()=> {
@@ -115,7 +127,8 @@ function Eat(Eater,Eaten) {
     
     if (d < _EAT_DISTANCE)
     {
-      io.to(Eaten).emit('p.dead' , Eaten);
+      io.emit('p.dead' , Eaten);
+      io.to(Eater).emit('p.score' , Eaten);
       delete  updated_players[Eaten];
       delete players[Eaten];
     }
