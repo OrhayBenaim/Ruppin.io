@@ -29,7 +29,8 @@ Back = () => {
         pathname: '/charselect',
         state: {
             userName: this.props.location.state.playerName,
-            email: this.props.location.state.email
+            email: this.props.location.state.email,
+            score: this.props.location.state.score
         }
     })
 }
@@ -76,11 +77,11 @@ Back = () => {
 
             <section id="start">
               
-                <a className="back" onClick={this.Back}><img src="images/back.png" /></a>
+                <a className="back" onClick={this.Back}><img src="images/back.png" alt='back' /></a>
                 <div className="container">
                     <a className="startgame" onClick={this.Start}>START GAME</a>
-                    <a className="chart" onClick={this.showModal}><img src="images/chart.png" /></a>
-                    <a className="exit" onClick={ ()=> {this.props.history.replace("/")}}><img src="images/exit.png" /></a>
+                    <a className="chart" onClick={this.showModal}><img src="images/chart.png" alt='scoreboard'/></a>
+                    <a className="exit" onClick={ ()=> {this.props.history.replace("/")}}><img src="images/exit.png" alt='exit'/></a>
           
                 </div>
 

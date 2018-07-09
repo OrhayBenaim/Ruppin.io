@@ -54,8 +54,9 @@ io.on('connection', function(socket){
   socket.on('p.eat', function(msg){ 
     
     let data = JSON.parse(msg);
-
-    updated_players[socket.id].Eating = data.Eating;
+    if(updated_players[socket.id]){
+      updated_players[socket.id].Eating = data.Eating;
+    }
   });
 
 

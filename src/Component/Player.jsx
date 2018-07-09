@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-const smoothing = 50;
 const radius = 30;
 
 

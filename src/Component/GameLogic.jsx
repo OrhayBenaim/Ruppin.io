@@ -5,7 +5,7 @@ import "./Styles/Styles.css";
 import PopUP from "./PopUp";
 import ajax from './AJAX';
 
-const ip = "localhost";
+const ip = "192.168.43.72";
 const AJAX = new ajax();
 
 let gameboard = null;
@@ -27,8 +27,7 @@ export default class GameLogic extends Component {
     this.avatar = this.props.location.state.characterID;
     this.HighScore = this.props.location.state.score;
     this.newScore = this.HighScore;
-    console.log(this.HighScore);
-    
+
     this.socket = io(`${ip}:3001`);
     this.Players = {};
 
@@ -44,12 +43,15 @@ export default class GameLogic extends Component {
 
   componentDidMount() {
     gameboard = document.getElementById("game");
+
+    
+
     this.socket.on("p.pos", msg => {
       this.Players = {};
       let data = JSON.parse(msg);
 
       for (let ply of data) {
-        if (ply.id == this.socket.id) {
+        if (ply.id === this.socket.id) {
           this.setState({
             x: ply.x,
             y: ply.y,
@@ -78,15 +80,14 @@ export default class GameLogic extends Component {
     });
     this.socket.on("p.dead", (dead_player) => {
 
-      if (this.socket.id == dead_player) {
+      if (this.socket.id === dead_player) {
         AJAX.UpdateScore(this.email, this.state.score)    
         .then(res => {
-          console.log(res);
-          
-          if(res)
+
+          if(res> 0 )
           this.newScore = this.state.score;
         })    
-       
+        this.socket.emit("p.leave", "true");
         clearInterval(score_tick);
         this.setState({ showPop: true });
       }
@@ -188,12 +189,20 @@ export default class GameLogic extends Component {
     
   };
 
+
+  keyPress = (e) =>{
+    if(e.charCode === 32){
+      this.eat();
+    }
+  }
+
   render() {
     return (
       <section
         id="game"
         onTouchMove={this.getPosition}
         onMouseMove={this.getPosition}
+        tabIndex={0} onKeyPress={this.keyPress}
       >
         <div className="btn_eat" onClick={this.eat} style={{opacity: this.state.opacity}} />
         {Object.values(this.state.Players)}
@@ -208,7 +217,7 @@ export default class GameLogic extends Component {
         />
 
         <a className="sound">
-          <img src="images/soundexit.png" onClick={this.exit}/>
+          <img src="images/soundexit.png" onClick={this.exit} alt='exit'/>
         </a>
         <h2>{this.state.score}</h2>
 
@@ -220,6 +229,7 @@ export default class GameLogic extends Component {
           />
         ) : null}
       </section>
+
     );
   }
 }

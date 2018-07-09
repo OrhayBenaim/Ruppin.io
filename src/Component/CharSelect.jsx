@@ -33,8 +33,9 @@ export default class CharSelect extends Component {
         })
     }
 
+
 Start = () =>{
-    if(this.state.element != undefined){
+    if(this.state.element !== undefined){
     this.props.history.replace({
         pathname: '/menu',
         state: {
@@ -54,14 +55,14 @@ Start = () =>{
             <section id="player">
                 <h1>SELECT YOUR PLAYER</h1>
                 <div className="container">
-                    <div className="select" onClick={this.handleClick}><img id="Yellow" src="images/fish1.png" /></div>
-                    <div className="select" onClick={this.handleClick}><img id="Orange"  src="images/fish2.png" /></div>
-                    <div className="select" onClick={this.handleClick}><img id="Blue" src="images/fish3.png" /></div>
-                    <div className="select" onClick={this.handleClick}><img id="Purple" src="images/fish4.png" /></div>
+                    <div className="select" onClick={this.handleClick}><img id="Yellow" src="images/fish1.png" alt='1'/></div>
+                    <div className="select" onClick={this.handleClick}><img id="Orange"  src="images/fish2.png"  alt='2'/></div>
+                    <div className="select" onClick={this.handleClick}><img id="Blue" src="images/fish3.png"  alt='3'/></div>
+                    <div className="select" onClick={this.handleClick}><img id="Purple" src="images/fish4.png"  alt='4'/></div>
                 </div>
-                <a className="approve" onClick={this.Start}><img src="images/select.png" /></a>
+                <a className="approve" onClick={this.Start}><img src="images/select.png" alt='confirm'/></a>
                 
-                <a className="back"  onClick={()=> {this.props.history.replace("/")}}><img src="images/back.png" /></a>
+                <a className="back"  onClick={()=> {this.props.history.replace("/")}}><img src="images/back.png" alt='back'/></a>
             </section>
         )
     }

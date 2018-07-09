@@ -1,6 +1,6 @@
 import $ from "jquery";
 
-const SQL_URL = 'http://localhost:49873/WebService.asmx';
+const SQL_URL = 'http://192.168.43.72:49873/WebService.asmx';
 
 
 export default class AJAX{
@@ -80,7 +80,7 @@ return new Promise( (resolve , reject)=> {
         },
         success: (data)=>{
         
-        if(data.d != 'null'){
+        if(data.d !== 'null'){
             data.d = JSON.parse(data.d);
             resolve(data.d);
            }else{
@@ -111,7 +111,7 @@ UpdateScore(email , score){
             },
             success: (data)=>{
             
-            if(data.d != 'null'){
+            if(data.d !== 'null'){
                 data.d = JSON.parse(data.d);
                 resolve(data.d);
                }
