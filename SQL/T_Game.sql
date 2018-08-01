@@ -8,10 +8,10 @@ Drop Database T_Game
 GO
 */
      
-CREATE DATABASE T_Game
+CREATE DATABASE T_Game2
 GO
 
-Use T_Game
+Use T_Game2
 GO
 
 -- ����� ���� ������
@@ -88,55 +88,36 @@ BEGIN
 END
 go
 
-create proc P_Check_Availability
+alter proc P_Check_Availability
 @Name [Us_Names],
 @Pass [Us_Names],
 @Email nvarchar(30)
 as
-IF EXISTS
+IF not EXISTS
 (select * from [dbo].[Users] where [Email] = @Email)
 begin
-print 'Email Already Exists'
-return(1)
-end
-else
-begin
 exec P_Insert_User @Name,@Pass,@Email
-return(0)
 end
 go
 
-exec P_Check_Availability 'Alon' , '1234' , 'email1'
+exec P_Check_Availability 'Alon2222' , '1234' , 'email1'
 go
 
 exec P_Check_Availability 'Yakir' , '123' , 'email2'
 go
 
-exec P_Check_Availability 'orchay' , '123' , 'email1'
+exec P_Check_Availability 'orchay' , '123' , 'abc4214125'
 go
 
 select * from Users
 
 
-create proc P_Update_HighScore
-@userID int,
+
+alter proc P_Update_HighScore
+@Email nvarchar(30),
 @NewScore int
 as
-
-if exists(select * from [dbo].[High_Score] where [High_Score] < @NewScore AND [User_Id] = @userID)
- BEGIN
-	update [dbo].[High_Score] set [High_Score] = @NewScore where [User_Id] = @userID
-end
-else 
-begin
-print 'Low or Equal Score'
-end
+	declare @id int
+	set @id = (select [User_Id] from Users where [Email] = @Email)
+	update [dbo].[High_Score] set [High_Score] = @NewScore where [User_Id] = @id AND [High_Score]<@NewScore
 go
-
-exec P_Update_HighScore 1 , 400
-go
-
-exec P_Update_HighScore 2,500
-go
-
-

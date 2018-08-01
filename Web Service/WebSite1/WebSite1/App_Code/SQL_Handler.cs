@@ -11,7 +11,7 @@ using System.Web.Script.Serialization;
 /// </summary>
 public class SQL_Handler
 {
-    static string ConnectionStr = @"Data Source=DESKTOP-PR7E7CC\SQLEXPRESS;Initial Catalog=T_Game2;Integrated Security=True";
+    static string ConnectionStr = ConfigurationManager.ConnectionStrings["Server"].ConnectionString;
 
     DataSet ds = new DataSet();
     SqlDataAdapter adtr = null;
