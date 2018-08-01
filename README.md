@@ -20,8 +20,7 @@ npm install
 ```
 
 ### SQL
-Copy T_Game.sql located in SQL into MMSQL and execute
-
+Execute the 'T_Game.sql' file in the SQL console for your chosen SQL server
 ### Web service
 Navigate to Web Service -> WebSite1 -> WebSite1 -> Web.config
 Replace 
@@ -69,7 +68,7 @@ Build and run WebService.asmx
 npm build
 ```
 * Upload the content of WebSite1 folder located in Web Service -> WebSite1 -> WebSite1 into your web service supported server
-* Execute T_Game.sql located in SQL, in your SQL server
+* Execute the 'T_Game.sql' file in the SQL console for your chosen SQL server
 
 ## Built With
 
