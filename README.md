@@ -63,7 +63,13 @@ Build and run WebService.asmx
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+* Upload content of the folder Server into your Node.JS supported server
+* Run in build folder and upload into your website server
+```
+npm build
+```
+* Upload the content of WebSite1 folder located in Web Service -> WebSite1 -> WebSite1 into your web service supported server
+* Execute T_Game.sql located in SQL, in your SQL server
 
 ## Built With
 
