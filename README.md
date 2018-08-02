@@ -1,7 +1,7 @@
 # Ruppin.IO
 
 IO game made in react and socket.io
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+![Preview](https://media.giphy.com/media/6A5axZPEN8gRiCLHMs/giphy.gif)
 
 ## Getting Started
 
