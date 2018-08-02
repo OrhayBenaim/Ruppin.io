@@ -1,6 +1,7 @@
 # Ruppin.IO
 
 IO game made in react and socket.io
+
 ![Preview](https://media.giphy.com/media/6A5axZPEN8gRiCLHMs/giphy.gif)
 
 ## Getting Started
