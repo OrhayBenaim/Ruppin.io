@@ -1,7 +1,7 @@
 # Ruppin.IO
 
 IO game made in react and socket.io
-
+<img src="https://i.imgur.com/32lU5up.gif" width="100" height="100" />
 ![Preview](https://i.imgur.com/32lU5up.gif)
 ## Getting Started
 
