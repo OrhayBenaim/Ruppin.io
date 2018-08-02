@@ -2,7 +2,7 @@
 
 IO game made in react and socket.io
 
-![Alt Text](https://i.imgur.com/32lU5up.gifv)
+![Preview](https://i.imgur.com/32lU5up.gif)
 ## Getting Started
 
 ### Installing
