@@ -1,8 +1,8 @@
 # Ruppin.IO
 
 IO game made in react and socket.io
-<img src="https://i.imgur.com/32lU5up.gif" width="100" height="100" />
-![Preview](https://i.imgur.com/32lU5up.gif)
+![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+
 ## Getting Started
 
 ### Installing
