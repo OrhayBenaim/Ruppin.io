@@ -32,13 +32,13 @@ io.on('connection', function(socket){
       y: data.y
     }
 
-    let add = true;
+
     for(let key in updated_players){
       if(key == socket.id){
-        add = false;
+        return;
       }
     }
-    if(add){
+
       updated_players[socket.id]={
         id: socket.id,
         x: data.x,
@@ -46,8 +46,7 @@ io.on('connection', function(socket){
         name: data.userName,
         avatar: data.avatar,
       }
-    
-    }
+
     
   });
 
